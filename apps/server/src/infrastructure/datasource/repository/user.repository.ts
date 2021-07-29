@@ -10,12 +10,8 @@ export class UserRepository implements IUserRepository {
 }
 
 export class UserRepositoryMock implements IUserRepository {
-    create(): Promise<UserModel> {
+    create(user: UserModel): Promise<UserModel> {
         return new Promise((resolve, reject)=>{
-            const user: UserModel = {
-                name: new UserName('田中 太郎'),
-                mail: new UserMail('user1@email.com')
-            }
             return user;
         })
     }
