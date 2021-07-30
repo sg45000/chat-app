@@ -13,11 +13,10 @@ export class UserAppService {
     ) {
     }
     async signUpUser(createCommand: UserCreateCommand): Promise<UserModel> {
-        const hashedPassWord = this.userService.hashedPassWord(createCommand.password);
         const user = new UserModel(
             new UserName(createCommand.name),
             new UserMail(createCommand.mail),
-            new UserHashedPass(hashedPassWord),
+            new UserHashedPass(createCommand.password),
         )
 
         return await this.userRepository.create(user);

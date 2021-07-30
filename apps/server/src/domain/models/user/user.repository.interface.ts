@@ -1,5 +1,5 @@
 import {UserModel} from './user.model';
 
-export interface IUserRepository {
-    create(user: UserModel): Promise<UserModel>
+export abstract class IUserRepository {
+    abstract create(user: UserModel): Promise<UserModel>
 }

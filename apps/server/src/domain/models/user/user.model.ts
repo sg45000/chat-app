@@ -6,7 +6,7 @@ export class UserModel {
         this.mail = mail;
         this.hashedPassWord = hashedPassWord;
     }
-    private name: UserName;
-    private mail: UserMail;
-    private hashedPassWord: UserHashedPass;
+    name: UserName;
+    mail: UserMail;
+    hashedPassWord: UserHashedPass;
 }

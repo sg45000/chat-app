@@ -1,5 +1,6 @@
 import {IncompatibleValueError} from '../../../types/error.types';
 import {RegexConst} from '../../../const/regex.const';
+import * as crypto from 'crypto';
 
 export class UserName {
     value: string;
@@ -25,7 +26,7 @@ export class UserMail {
 
     checkFormat(value: string) {
         const regex = new RegExp(RegexConst.EMAIL)
-        if(regex.test(value)){
+        if(!regex.test(value)){
             throw new IncompatibleValueError("正しいメールアドレスの形式を設定してください。")
         }
     }
@@ -38,8 +39,11 @@ export class UserHashedPass {
     constructor(value: string) {
         this.checkLength(value);
         this.checkFormat(value);
-        this.checkHashed(value);
-        this.value = value;
+        const hash = this.hashed(value);
+        this.value = hash;
+    }
+    hashed(value: string): string {
+        return crypto.createHash('sha512').update(value).digest('hex');
     }
     checkLength(value: string) {
         if(value.length <= this.MIN_LENGTH || value.length >= this.MAX_LENGTH) {
@@ -48,12 +52,8 @@ export class UserHashedPass {
     }
     checkFormat(value: string) {
         const regex = new RegExp(RegexConst.HALF_WIDTH_ALPHANUMERIC)
-        if(regex.test(value)){
+        if(!regex.test(value)){
             throw new IncompatibleValueError("ユーザーのパスワードは英数字を設定してください。")
         }
-    }
-    checkHashed(value: string) {
-        // fixme valueがハッシュ化された文字列かどうかを確認する。
-        console.log("fixme: valueがハッシュ化された文字列かどうかを確認する。")
     }
 }
