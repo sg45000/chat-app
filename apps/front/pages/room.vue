@@ -1,0 +1,35 @@
+<template>
+  <ChatContainer v-bind:posts="posts" />
+</template>
+
+<script lang="ts">
+import {Message} from "~/types/types";
+import {PostsRepository} from "~/repositories/posts.repository"
+import CustomVue from '@/custom';
+const postRepository = new PostsRepository()
+
+interface Data {
+  posts: Message[]
+}
+
+export default CustomVue.extend({
+  name: "room",
+  data(): Data  {
+    return {
+      posts: []
+    }
+  },
+  async created() {
+    this.posts = await this.getPosts()
+  },
+  methods: {
+    async getPosts(): Promise<Message[]> {
+      return await postRepository.get();
+    }
+  }
+})
+</script>
+
+<style scoped>
+
+</style>

@@ -28,9 +28,21 @@
       "@types/node"
     ]
   },
+  "files": [
+    "shims-vue.d.ts"
+  ],
+  "include": [
+    "components/**/*.ts",
+    "components/**/*.vue",
+    "layouts/**/*.ts",
+    "layouts/**/*.vue",
+    "pages/**/*.ts",
+    "pages/**/*.vue"
+  ],
   "exclude": [
     "node_modules",
     ".nuxt",
     "dist"
-  ]
+  ],
+  "resolveJsonModule": true
 }
