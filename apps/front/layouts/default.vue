@@ -88,9 +88,9 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  data () {
+  data: () =>  {
     return {
       clipped: false,
       drawer: false,
