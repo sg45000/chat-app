@@ -3,13 +3,13 @@
 </template>
 
 <script lang="ts">
-import {Message} from "~/types/types";
+import {Post} from "~/types/types";
 import {PostsRepository} from "~/repositories/posts.repository"
 import CustomVue from '@/custom';
 const postRepository = new PostsRepository()
 
 interface Data {
-  posts: Message[]
+  posts: Post[]
 }
 
 export default CustomVue.extend({
@@ -23,7 +23,7 @@ export default CustomVue.extend({
     this.posts = await this.getPosts()
   },
   methods: {
-    async getPosts(): Promise<Message[]> {
+    async getPosts(): Promise<Post[]> {
       return await postRepository.get();
     }
   }
