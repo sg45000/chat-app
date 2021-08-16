@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
+import { NuxtConfig } from '@nuxt/types'
 
-export default {
+const nuxtConfig: NuxtConfig = {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -49,7 +50,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      light: true,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -68,3 +69,5 @@ export default {
   build: {
   }
 }
+
+export default nuxtConfig;
