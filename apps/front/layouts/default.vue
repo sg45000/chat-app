@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app light>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -89,7 +89,7 @@
 </template>
 
 <script lang="ts">
-export default {
+export default  {
   data: () =>  {
     return {
       clipped: false,
