@@ -4,6 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev:front": "yarn workspace front dev",
+    "dev:server": "yarn workspace server start:dev"
+  },
   "workspaces": [
     "./apps/*"
   ]

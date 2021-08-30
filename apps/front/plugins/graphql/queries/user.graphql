@@ -1,0 +1,10 @@
+mutation signup($name: String!, $mail: String!, $password: String!) {
+  signup(params: {
+    name: $name,
+    mail: $mail,
+    password: $password,
+  }){
+    name,
+    mail
+  }
+}

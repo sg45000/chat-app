@@ -1,5 +1,5 @@
 <template>
-  <v-app light>
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -89,10 +89,12 @@
 </template>
 
 <script lang="ts">
-export default  {
+import CustomVue from '~/custom';
+
+export default CustomVue.extend({
   data: () =>  {
     return {
-      clipped: false,
+      clipped: true,
       drawer: false,
       fixed: false,
       items: [
@@ -111,6 +113,11 @@ export default  {
           title: 'Room',
           to: '/room'
         },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Login',
+          to: '/login'
+        },
       ],
       miniVariant: false,
       right: true,
@@ -118,5 +125,5 @@ export default  {
       title: 'Vuetify.js'
     }
   }
-}
+})
 </script>

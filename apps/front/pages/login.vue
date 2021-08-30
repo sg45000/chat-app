@@ -40,6 +40,7 @@
 
 <script lang="ts">
 import CustomVue from '~/custom';
+import {gqlClientSdk} from '~/plugins/graphql/client';
 
 interface Data {
   username: string,
@@ -68,6 +69,14 @@ export default CustomVue.extend({
   methods: {
     async login() {
       console.log(this.username + this.password);
+      const response = await gqlClientSdk.signup(
+        {
+          name: this.username,
+          password: this.password,
+          mail: "aaaa@gmail.com"
+        }
+      )
+      console.log('response is ' + response)
     }
   }
 })
