@@ -1,7 +1,12 @@
 import colors from 'vuetify/es5/util/colors'
 import { NuxtConfig } from '@nuxt/types'
 
+const PORT = process.env.PORT || 3000;
+
 const nuxtConfig: NuxtConfig = {
+  server: {
+    port: PORT,
+  },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 

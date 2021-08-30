@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "dev:front": "yarn workspace front dev",
-    "dev:server": "yarn workspace server start:dev"
+    "dev:server": "yarn workspace server start:dev",
+    "dev": "yarn dev:front & yarn dev:server"
   },
   "workspaces": [
     "./apps/*"
