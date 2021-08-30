@@ -5,9 +5,15 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev:front": "yarn workspace front dev",
-    "dev:server": "yarn workspace server start:dev",
-    "dev": "yarn dev:front & yarn dev:server"
+    "start": "yarn workspace server start:prod",
+    "build": "yarn server:build && yarn front:build",
+    "dev": "yarn dev:front & yarn dev:server",
+    "front:dev": "yarn workspace front dev",
+    "front:build": "yarn front:gql && yarn workspace front build",
+    "front:gql": "yarn workspace front graphql:codegen",
+    "front:generate": "yarn front:gql && yarn workspace front generate",
+    "server:dev": "yarn workspace server start:dev",
+    "server:build": "yarn workspace server build"
   },
   "workspaces": [
     "./apps/*"
