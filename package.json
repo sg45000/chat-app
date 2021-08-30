@@ -6,8 +6,8 @@
   "private": true,
   "scripts": {
     "start": "yarn workspace server start:prod",
-    "build": "yarn server:build && yarn front:build",
-    "dev": "yarn dev:front & yarn dev:server",
+    "build": "yarn server:build && yarn front:build && yarn front:generate",
+    "dev": "yarn front:dev & yarn server:dev",
     "front:dev": "yarn workspace front dev",
     "front:build": "yarn front:gql && yarn workspace front build",
     "front:gql": "yarn workspace front graphql:codegen",
