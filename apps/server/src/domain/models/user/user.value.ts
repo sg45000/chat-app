@@ -1,12 +1,15 @@
 import {IncompatibleValueError} from '../../../types/error.types';
 import {RegexConst} from '../../../const/regex.const';
 import * as crypto from 'crypto';
+import {AbstractValueObject} from '../../../abstract/abstract-value-object';
 
-export class UserName {
-    value: string;
+/**
+ * ユーザーの名前の値オブジェクト
+ */
+export class UserName extends AbstractValueObject<string> {
     constructor(value: string) {
+        super(value);
         this.checkLength(value);
-        this.value = value;
     }
 
     checkLength(value: string) {
@@ -17,11 +20,13 @@ export class UserName {
 
 }
 
-export class UserMail {
-    value: string;
+/**
+ * ユーザーのメールアドレスの値オブジェクト
+ */
+export class UserMail extends AbstractValueObject<string> {
     constructor(value: string) {
+        super(value);
         this.checkFormat(value)
-        this.value = value;
     }
 
     checkFormat(value: string) {
@@ -32,17 +37,18 @@ export class UserMail {
     }
 }
 
-export class UserHashedPass {
-    value: string;
+/**
+ * ユーザーのハッシュ化されたパスワードの値オブジェクト
+ */
+export class UserHashedPass extends AbstractValueObject<string> {
     private MAX_LENGTH = 16;
     private MIN_LENGTH = 8;
     constructor(value: string) {
+        super(UserHashedPass.hashed(value));
         this.checkLength(value);
         this.checkFormat(value);
-        const hash = this.hashed(value);
-        this.value = hash;
     }
-    hashed(value: string): string {
+    static hashed(value: string): string {
         return crypto.createHash('sha512').update(value).digest('hex');
     }
     checkLength(value: string) {
