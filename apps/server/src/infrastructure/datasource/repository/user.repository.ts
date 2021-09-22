@@ -7,56 +7,59 @@ import {UserMail} from '../../../domain/models/user/user.value';
 @Injectable()
 export class UserRepository implements IUserRepository {
     constructor(
-        private readonly prismaClientService: PrismaClientService,
-    ) {
-    }
+        private readonly prismaClientService: PrismaClientService
+    ) {}
+
+
     async create(user: UserModel): Promise<UserModel> {
         const userEntity = await this.prismaClientService.user.create({
             data: {
-                name: user.name.value,
-                mail: user.mail.value,
+                name    : user.name.value,
+                mail    : user.mail.value,
                 hashedPw: user.hashedPassWord.value,
-            }
+            },
         });
         return UserModel.create({
-            name: userEntity.name,
-            mail: userEntity.mail,
+            name          : userEntity.name,
+            mail          : userEntity.mail,
             hashedPassWord: userEntity.hashedPw,
         });
     }
 
-    async findOneByMail(mail: UserMail): Promise<UserModel> {
+    async findOneByMail(mail: UserMail): Promise<UserModel | null> {
         const userEntity = await this.prismaClientService.user.findFirst({
             where: {
                 mail: mail.value,
-            }
+            },
         });
+        if (!userEntity) {
+            return null;
+        }
         return UserModel.create({
-            name: userEntity.name,
-            mail: userEntity.mail,
+            name          : userEntity.name,
+            mail          : userEntity.mail,
             hashedPassWord: userEntity.hashedPw,
         });
     }
-
 }
 
 @Injectable()
 export class UserRepositoryMock implements IUserRepository {
     async create(user: UserModel): Promise<UserModel> {
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
             resolve(user);
-        })
+        });
     }
 
-    async findOneByMail(mail: UserMail): Promise<UserModel> {
-        return new Promise((resolve, reject)=>{
+    async findOneByMail(mail: UserMail): Promise<UserModel | null> {
+        return new Promise((resolve, reject) => {
             resolve(
                 UserModel.create({
-                    name: 'あああ　いいい',
-                    mail: mail.value,
+                    name          : 'あああ　いいい',
+                    mail          : mail.value,
                     hashedPassWord: 'bafeuiiuewf4hnea',
-                })
+                }),
             );
-        })
+        });
     }
 }
