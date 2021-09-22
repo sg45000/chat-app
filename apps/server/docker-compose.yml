@@ -1,0 +1,16 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:12.6
+    volumes:
+      - data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+      POSTGRES_DB: mydb
+      TZ: Asia/Tokyo
+    ports:
+      - 5432:5432
+volumes:
+  data:

@@ -22,7 +22,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "graphql:codegen": "ts-node src/genGraphqlSchema.ts"
+    "graphql:codegen": "ts-node src/genGraphqlSchema.ts",
+    "migrate:prisma": "dotenv -e ./env/.env.development -- npx prisma migrate dev --name"
   },
   "dependencies": {
     "@apollo/gateway": "^0.35.1",
@@ -30,6 +31,7 @@
     "@nestjs/core": "^7.6.15",
     "@nestjs/graphql": "^8.0.2",
     "@nestjs/platform-express": "^7.6.15",
+    "@prisma/client": "^3.1.1",
     "apollo-server-express": "^2.25.2",
     "graphql": "^15.5.1",
     "graphql-tools": "^7.0.5",
@@ -49,11 +51,13 @@
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
+    "dotenv-cli": "^4.0.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
+    "prisma": "^3.1.1",
     "supertest": "^6.1.3",
     "ts-jest": "^26.5.4",
     "ts-loader": "^8.0.18",
