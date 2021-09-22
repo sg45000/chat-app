@@ -1,10 +1,12 @@
 import {UserHashedPass, UserMail, UserName} from './user.value';
 import {AbstractDomainModelObject} from '../../../abstract/abstract-domain-model-object';
+import {EntityPId} from '../common.value';
 
 /**
  * UserModelのプロパティinterface
  */
 export interface UserModelProps {
+    id?: EntityPId;
     name: UserName;
     mail: UserMail;
     hashedPassWord: UserHashedPass;
@@ -14,6 +16,7 @@ export interface UserModelProps {
  * UserModel生成の引数interface
  */
 export interface UserModelArgs {
+    id?: string;
     name: string;
     mail: string;
     hashedPassWord: string;
@@ -28,13 +31,17 @@ export class UserModel extends AbstractDomainModelObject<UserModelProps> {
     /**
      * ファクトリメソッド
      * @param args
+     * @param id
      */
     static create(args: UserModelArgs): UserModel {
-        return new UserModel({
-            name          : new UserName(args.name),
-            mail          : new UserMail(args.mail),
-            hashedPassWord: new UserHashedPass(args.hashedPassWord),
-        });
+        return new UserModel(
+            {
+                name          : new UserName(args.name),
+                mail          : new UserMail(args.mail),
+                hashedPassWord: new UserHashedPass(args.hashedPassWord),
+            },
+            args.id ? new EntityPId(args.id) : undefined,
+        );
     }
 
     /**

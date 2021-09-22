@@ -3,6 +3,7 @@ import {UserModel} from '../../../domain/models/user/user.model';
 import {Injectable} from '@nestjs/common';
 import {PrismaClientService} from '../orm/prisma-client.service';
 import {UserMail} from '../../../domain/models/user/user.value';
+import {v4 as UUID} from 'uuid';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -19,11 +20,14 @@ export class UserRepository implements IUserRepository {
                 hashedPw: user.hashedPassWord.value,
             },
         });
-        return UserModel.create({
-            name          : userEntity.name,
-            mail          : userEntity.mail,
-            hashedPassWord: userEntity.hashedPw,
-        });
+        return UserModel.create(
+            {
+                id            : userEntity.id,
+                name          : userEntity.name,
+                mail          : userEntity.mail,
+                hashedPassWord: userEntity.hashedPw,
+            }
+        );
     }
 
     async findOneByMail(mail: UserMail): Promise<UserModel | null> {
@@ -35,11 +39,15 @@ export class UserRepository implements IUserRepository {
         if (!userEntity) {
             return null;
         }
-        return UserModel.create({
-            name          : userEntity.name,
-            mail          : userEntity.mail,
-            hashedPassWord: userEntity.hashedPw,
-        });
+        return UserModel.create(
+            {
+                id            : userEntity.id,
+                name          : userEntity.name,
+                mail          : userEntity.mail,
+                hashedPassWord: userEntity.hashedPw,
+            },
+
+        );
     }
 }
 
@@ -54,11 +62,13 @@ export class UserRepositoryMock implements IUserRepository {
     async findOneByMail(mail: UserMail): Promise<UserModel | null> {
         return new Promise((resolve, reject) => {
             resolve(
-                UserModel.create({
-                    name          : 'あああ　いいい',
-                    mail          : mail.value,
-                    hashedPassWord: 'bafeuiiuewf4hnea',
-                }),
+                UserModel.create(
+                    {
+                        id            : UUID(),
+                        name          : 'あああ いいい',
+                        mail          : 'sample@googlea.com',
+                        hashedPassWord: 'sdfghjk',
+                    })
             );
         });
     }
