@@ -10,9 +10,9 @@
 
 <script lang="ts">
 export default {
-  name: "MessageBox",
-  props: ["message"]
-}
+  name : 'MessageBox',
+  props: ['message']
+};
 </script>
 
 <style scoped>

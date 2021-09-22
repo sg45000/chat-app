@@ -5,18 +5,18 @@
     :key="i"
     >
       <v-spacer v-if="post.isMine"></v-spacer>
-      <v-avatar color="primary" size="50" v-if="!post.isMine">
+      <v-avatar v-if="!post.isMine" color="primary" size="50">
 <!--        <img src="" alt="">-->
       </v-avatar>
       <v-col>
-        <MessageBox v-bind:message="post.msg"/>
+        <MessageBox :message="post.msg"/>
       </v-col>
       <v-spacer v-if="!post.isMine"></v-spacer>
     </v-row>
     <v-row>
       <v-text-field
-        label="メッセージ"
         v-model="message"
+        label="メッセージ"
         hide-details="auto"
       ></v-text-field>
       <v-icon :disabled="!message" @click="send">mdi-send</v-icon>
@@ -25,27 +25,27 @@
 </template>
 
 <script lang="ts">
-import MessageBox from "./MessageBox.vue";
+import MessageBox from './MessageBox.vue';
 import CustomVue from '~/custom';
 import {PostsRepository} from '~/repositories/posts.repository';
-const postRepository = new PostsRepository()
+const postRepository = new PostsRepository();
 interface Data {
   rules: ((value: string)=>string | boolean)[]
 }
 export default  CustomVue.extend({
-  name: "ChatContainer",
+  name      : 'ChatContainer',
   components: {
     MessageBox
   },
-  data(){
+  data() {
     return {
       message: '',
-    }
+    };
   },
   methods: {
     async send() {
       await postRepository.post({
-        msg: this.message,
+        msg   : this.message,
         postAt: new Date(),
         isMine: true,
       });
@@ -55,7 +55,7 @@ export default  CustomVue.extend({
       this.message = '';
     }
   },
-  props:  ["posts"]
+  props: ['posts']
 });
 </script>
 

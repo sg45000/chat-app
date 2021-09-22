@@ -95,35 +95,35 @@ export default CustomVue.extend({
   data: () =>  {
     return {
       clipped: true,
-      drawer: false,
-      fixed: false,
-      items: [
+      drawer : false,
+      fixed  : false,
+      items  : [
         {
-          icon: 'mdi-apps',
+          icon : 'mdi-apps',
           title: 'Welcome',
-          to: '/'
+          to   : '/'
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon : 'mdi-chart-bubble',
           title: 'Inspire',
-          to: '/inspire'
+          to   : '/inspire'
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon : 'mdi-chart-bubble',
           title: 'Room',
-          to: '/room'
+          to   : '/room'
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon : 'mdi-chart-bubble',
           title: 'Login',
-          to: '/login'
+          to   : '/login'
         },
       ],
       miniVariant: false,
-      right: true,
+      right      : true,
       rightDrawer: false,
-      title: 'Vuetify.js'
-    }
+      title      : 'Vuetify.js'
+    };
   }
-})
+});
 </script>

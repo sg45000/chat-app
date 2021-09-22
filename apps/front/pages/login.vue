@@ -51,12 +51,12 @@ interface Data {
   }
 }
 export default CustomVue.extend({
-  name: "login",
+  name: 'login',
   data(): Data {
     return {
       username: '',
       password: '',
-      rules: {
+      rules   : {
         username: [
           (v: string) => !!v || 'ユーザ名を入れてください。'
         ],
@@ -64,22 +64,22 @@ export default CustomVue.extend({
           (v: string) => !!v || 'パスワードを入れてください。'
         ]
       }
-    }
+    };
   },
   methods: {
     async login() {
       console.log(this.username + this.password);
       const response = await gqlClientSdk.signup(
         {
-          name: this.username,
+          name    : this.username,
           password: this.password,
-          mail: "aaaa@gmail.com"
+          mail    : 'aaaa@gmail.com'
         }
-      )
-      console.log('response is ' + response)
+      );
+      console.log('response is ' + response);
     }
   }
-})
+});
 </script>
 
 <style scoped>
