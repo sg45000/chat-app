@@ -1,4 +1,5 @@
 import {UserModel} from './user.model';
+import {UserMail} from './user.value';
 
 export abstract class IUserRepository {
     /**
@@ -6,4 +7,10 @@ export abstract class IUserRepository {
      * @param user
      */
     abstract create(user: UserModel): Promise<UserModel>
+
+    /**
+     * メールアドレスをキーにDBからユーザーを取得する
+     * @param mail
+     */
+    abstract findOneByMail(mail: UserMail): Promise<UserModel>
 }

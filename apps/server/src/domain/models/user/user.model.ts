@@ -40,21 +40,21 @@ export class UserModel extends AbstractDomainModelObject<UserModelProps>{
     /**
      * ユーザーの名前を参照
      */
-    get name(): string {
-        return this.props.name.value;
+    get name(): UserName {
+        return this.props.name;
     }
 
     /**
      * ユーザーのメールアドレスを参照
      */
-    get mail(): string {
-        return this.props.mail.value;
+    get mail(): UserMail {
+        return this.props.mail;
     }
 
     /**
      * ユーザーのハッシュ化されたパスワードを参照
      */
-    get hashedPassWord(): string {
-        return this.props.hashedPassWord.value;
+    get hashedPassWord(): UserHashedPass {
+        return this.props.hashedPassWord;
     }
 }
