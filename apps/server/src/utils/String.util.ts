@@ -5,7 +5,7 @@ export class StringUtil {
      * @param max
      * @param value
      */
-    static between(min: number, max: number, value: string) {
+    static between(min: number, max: number, value: string): boolean {
         return !!(min <= value.length && value.length <= max);
     }
 }

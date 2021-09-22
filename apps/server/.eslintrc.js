@@ -16,7 +16,7 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
-    '@typescript-eslint/explicit-function-return-type': 1,
+    // メソッドの返り値の型指定
     '@typescript-eslint/explicit-module-boundary-types': 1,
     // 厳密等価演算子
     "eqeqeq": 2,
