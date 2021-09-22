@@ -29,9 +29,7 @@ import MessageBox from './MessageBox.vue';
 import CustomVue from '~/custom';
 import {PostsRepository} from '~/repositories/posts.repository';
 const postRepository = new PostsRepository();
-interface Data {
-  rules: ((value: string)=>string | boolean)[]
-}
+
 export default  CustomVue.extend({
   name      : 'ChatContainer',
   components: {
