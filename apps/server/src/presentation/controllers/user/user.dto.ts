@@ -16,8 +16,8 @@ export class SignupUserRequest {
 @ObjectType()
 export class UserResponse {
     constructor(user: UserModel) {
-        this.name = user.name.value;
-        this.mail = user.mail.value;
+        this.name = user.name;
+        this.mail = user.mail;
     }
     @Field({description: '名前'})
     readonly name: string;
