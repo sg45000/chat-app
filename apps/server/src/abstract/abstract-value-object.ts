@@ -1,4 +1,5 @@
 import { shallowEqual } from 'shallow-equal-object';
+import {StringUtil} from '../utils/String.util';
 
 export abstract class AbstractValueObject<T> {
     protected readonly _value: T;
@@ -16,5 +17,15 @@ export abstract class AbstractValueObject<T> {
 
     get value(): T {
         return this._value;
+    }
+
+    /**
+     * 値が範囲外の文字列長か
+     * @param min
+     * @param max
+     * @param value
+     */
+    protected illegalLengthValue(min: number, max: number, value: string): boolean {
+        return !StringUtil.between(min, max, value)
     }
 }

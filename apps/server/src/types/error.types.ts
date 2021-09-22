@@ -4,7 +4,7 @@ export class CustomError extends Error {
     }
 }
 
-export class IncompatibleValueError extends CustomError {
+export class IllegalArgumentException extends CustomError {
     constructor(message: string) {
         super(message);
         console.error(message); // fixme ロガー
