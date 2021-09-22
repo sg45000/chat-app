@@ -4,7 +4,7 @@ import {StringUtil} from '../utils/String.util';
 export abstract class AbstractValueObject<T> {
     protected readonly _value: T;
 
-    constructor(_value: T) {
+    protected constructor(_value: T) {
         this._value = Object.freeze(_value);
     }
 
