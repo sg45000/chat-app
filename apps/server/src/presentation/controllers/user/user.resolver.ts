@@ -16,7 +16,7 @@ export class UserResolver {
             UserModel.create({
                 name: 'サンプル',
                 mail: 'sample@nnn.co.jp',
-                password: 'password',
+                hashedPassWord: 'password',
             })
         );
     }

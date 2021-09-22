@@ -16,7 +16,7 @@ export interface UserModelProps {
 export interface UserModelArgs {
     name: string;
     mail: string;
-    password: string;
+    hashedPassWord: string;
 }
 
 /**
@@ -33,7 +33,7 @@ export class UserModel extends AbstractDomainModelObject<UserModelProps>{
         return new UserModel({
             name: new UserName(args.name),
             mail: new UserMail(args.mail),
-            hashedPassWord: new UserHashedPass(args.password),
+            hashedPassWord: new UserHashedPass(args.hashedPassWord),
         });
     }
 
@@ -54,7 +54,7 @@ export class UserModel extends AbstractDomainModelObject<UserModelProps>{
     /**
      * ユーザーのハッシュ化されたパスワードを参照
      */
-    get hashedPass(): string {
+    get hashedPassWord(): string {
         return this.props.hashedPassWord.value;
     }
 }

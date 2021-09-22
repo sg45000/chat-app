@@ -20,7 +20,7 @@ export class UserAppService {
         const user = UserModel.create({
             name:createCommand.name,
             mail: createCommand.mail,
-            password: createCommand.password,
+            hashedPassWord: this.userService.createHashedPassword(createCommand.password),
         });
 
         return await this.userRepository.create(user);
