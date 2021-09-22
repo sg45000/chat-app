@@ -11,7 +11,7 @@ export class UserName extends AbstractValueObject<string> {
     constructor(value: string) {
         super(value);
         if(this.illegalLengthValue(this.MIN_LENGTH, this.MAX_LENGTH, value)) {
-            throw new IllegalArgumentException(`ユーザーの名前は${this.MIN_LENGTH}文字以上、${this.MAX_LENGTH}文字以下で設定してください。`)
+            throw new IllegalArgumentException(`ユーザーの名前は${this.MIN_LENGTH}文字以上、${this.MAX_LENGTH}文字以下で設定してください。`);
         }
     }
 }
@@ -22,9 +22,9 @@ export class UserName extends AbstractValueObject<string> {
 export class UserMail extends AbstractValueObject<string> {
     constructor(value: string) {
         super(value);
-        const regex = new RegExp(RegexConst.EMAIL)
-        if(!regex.test(value)){
-            throw new IllegalArgumentException("正しいメールアドレスの形式を設定してください。")
+        const regex = new RegExp(RegexConst.EMAIL);
+        if(!regex.test(value)) {
+            throw new IllegalArgumentException('正しいメールアドレスの形式を設定してください。');
         }
     }
 }

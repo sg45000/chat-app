@@ -14,15 +14,15 @@ export class UserResolver {
     sayHello(): UserResponse {
         return new UserResponse(
             UserModel.create({
-                name: 'サンプル',
-                mail: 'sample@nnn.co.jp',
+                name          : 'サンプル',
+                mail          : 'sample@nnn.co.jp',
                 hashedPassWord: 'password',
             })
         );
     }
 
     @Mutation(returns => UserResponse)
-    async signup(@Args("params") params: SignupUserRequest): Promise<UserResponse> {
+    async signup(@Args('params') params: SignupUserRequest): Promise<UserResponse> {
         const user = await this.userAppService.signUpUser(params);
         return new UserResponse(user);
     }

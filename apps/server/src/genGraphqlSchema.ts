@@ -13,4 +13,4 @@ async function generateSchema() {
     console.log(printSchema(schema));
 }
 
-generateSchema();
+void generateSchema();

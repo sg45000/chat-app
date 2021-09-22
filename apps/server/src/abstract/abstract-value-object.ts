@@ -1,4 +1,4 @@
-import { shallowEqual } from 'shallow-equal-object';
+import {shallowEqual} from 'shallow-equal-object';
 import {StringUtil} from '../utils/String.util';
 
 export abstract class AbstractValueObject<T> {
@@ -26,6 +26,6 @@ export abstract class AbstractValueObject<T> {
      * @param value
      */
     protected illegalLengthValue(min: number, max: number, value: string): boolean {
-        return !StringUtil.between(min, max, value)
+        return !StringUtil.between(min, max, value);
     }
 }

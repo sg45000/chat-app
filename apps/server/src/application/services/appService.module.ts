@@ -10,6 +10,6 @@ import {RepositoryModule} from '../../infrastructure/datasource/repository/repos
         DomainModelServiceModule,
         RepositoryModule,
     ],
-    exports    : [UserAppService],
+    exports: [UserAppService],
 })
 export class AppServiceModule {}

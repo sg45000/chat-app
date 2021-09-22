@@ -18,12 +18,12 @@ export class UserAppService {
      */
     async signUpUser(createCommand: UserCreateCommand): Promise<UserModel> {
         const user = UserModel.create({
-            name:createCommand.name,
-            mail: createCommand.mail,
+            name          : createCommand.name,
+            mail          : createCommand.mail,
             hashedPassWord: this.userService.createHashedPassword(createCommand.password),
         });
 
-        const duplicated = await this.userService.existsDuplicatedUser(user.mail)
+        const duplicated = await this.userService.existsDuplicatedUser(user.mail);
         if(duplicated) {
             throw new BadRequestException('指定のメールアドレスは既に登録されています。');
         }

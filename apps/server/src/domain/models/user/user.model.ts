@@ -24,15 +24,15 @@ export interface UserModelArgs {
  * ユーザーのドメインモデル
  * インスタンス生成は静的なcreateメソッドで行う
  */
-export class UserModel extends AbstractDomainModelObject<UserModelProps>{
+export class UserModel extends AbstractDomainModelObject<UserModelProps> {
     /**
      * ファクトリメソッド
      * @param args
      */
     static create(args: UserModelArgs): UserModel {
         return new UserModel({
-            name: new UserName(args.name),
-            mail: new UserMail(args.mail),
+            name          : new UserName(args.name),
+            mail          : new UserMail(args.mail),
             hashedPassWord: new UserHashedPass(args.hashedPassWord),
         });
     }
