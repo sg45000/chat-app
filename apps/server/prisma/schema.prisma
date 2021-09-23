@@ -12,10 +12,10 @@ generator client {
 
 model User {
     @@map(name: "users")
-    id String @id @default(uuid())
+    id String @id
     firstName String @map(name: "first_name") @default("")
     lastName String @map(name: "last_name") @default("")
-    mail String
+    mail String @unique
     hashedPw String @map(name: "hashed_pw")
     createdAt DateTime @default(now()) @map(name: "created_at")
     updatedAt DateTime @updatedAt @default(now()) @map(name: "updated_at")
