@@ -19,7 +19,8 @@ type Mutation {
 }
 
 input SignupUserRequest {
-  name: String!
+  lastName: String!
+  firstName: String!
   mail: String!
   password: String!
 }
