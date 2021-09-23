@@ -23,7 +23,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "graphql:codegen": "ts-node src/genGraphqlSchema.ts",
-    "migrate:prisma": "dotenv -e ./env/.env.development -- npx prisma migrate dev --name"
+    "migrate:prisma": "dotenv -e ./env/.env.development -- npx prisma migrate dev --name",
+    "prisma:studio": "dotenv -e ./env/.env.development -- npx prisma studio"
   },
   "dependencies": {
     "@apollo/gateway": "^0.35.1",
