@@ -15,15 +15,17 @@ export class UserRepository implements IUserRepository {
     async create(user: UserModel): Promise<UserModel> {
         const userEntity = await this.prismaClientService.user.create({
             data: {
-                name    : user.name.value,
-                mail    : user.mail.value,
-                hashedPw: user.hashedPassWord.value,
+                firstName: user.name.value.firstName,
+                lastName : user.name.value.lastName,
+                mail     : user.mail.value,
+                hashedPw : user.hashedPassWord.value,
             },
         });
         return UserModel.create(
             {
                 id            : userEntity.id,
-                name          : userEntity.name,
+                firstName     : userEntity.firstName,
+                lastName      : userEntity.lastName,
                 mail          : userEntity.mail,
                 hashedPassWord: userEntity.hashedPw,
             }
@@ -42,7 +44,8 @@ export class UserRepository implements IUserRepository {
         return UserModel.create(
             {
                 id            : userEntity.id,
-                name          : userEntity.name,
+                firstName     : userEntity.firstName,
+                lastName      : userEntity.lastName,
                 mail          : userEntity.mail,
                 hashedPassWord: userEntity.hashedPw,
             },
@@ -65,7 +68,8 @@ export class UserRepositoryMock implements IUserRepository {
                 UserModel.create(
                     {
                         id            : UUID(),
-                        name          : 'あああ いいい',
+                        firstName     : 'あああ',
+                        lastName      : 'いいい',
                         mail          : 'sample@googlea.com',
                         hashedPassWord: 'sdfghjk',
                     })

@@ -6,7 +6,10 @@ import {RegexConst} from '../../../const/regex.const';
 @InputType()
 export class SignupUserRequest {
     @Field()
-    readonly name: string;
+    readonly lastName: string;
+
+    @Field()
+    readonly firstName: string;
 
     @Field()
     readonly mail: string;
@@ -21,7 +24,7 @@ export class SignupUserRequest {
 @ObjectType()
 export class UserResponse {
     constructor(user: UserModel) {
-        this.name = user.name.value;
+        this.name = user.name.value.lastName + user.name.value.firstName;
         this.mail = user.mail.value;
     }
     @Field({description: '名前'})

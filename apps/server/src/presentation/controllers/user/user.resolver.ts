@@ -14,7 +14,8 @@ export class UserResolver {
     sayHello(): UserResponse {
         return new UserResponse(
             UserModel.create({
-                name          : 'サンプル',
+                lastName      : 'サンプル',
+                firstName     : '太郎',
                 mail          : 'sample@nnn.co.jp',
                 hashedPassWord: 'password',
             })

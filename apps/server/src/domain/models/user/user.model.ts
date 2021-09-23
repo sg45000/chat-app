@@ -17,7 +17,8 @@ export interface UserModelProps {
  */
 export interface UserModelArgs {
     id?: string;
-    name: string;
+    lastName: string;
+    firstName: string;
     mail: string;
     hashedPassWord: string;
 }
@@ -31,12 +32,11 @@ export class UserModel extends AbstractDomainModelObject<UserModelProps> {
     /**
      * ファクトリメソッド
      * @param args
-     * @param id
      */
     static create(args: UserModelArgs): UserModel {
         return new UserModel(
             {
-                name          : new UserName(args.name),
+                name          : new UserName({lastName: args.lastName, firstName: args.firstName}),
                 mail          : new UserMail(args.mail),
                 hashedPassWord: new UserHashedPass(args.hashedPassWord),
             },

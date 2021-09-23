@@ -18,7 +18,8 @@ export class UserAppService {
      */
     async signUpUser(createCommand: UserCreateCommand): Promise<UserModel> {
         const user = UserModel.create({
-            name          : createCommand.name,
+            lastName      : createCommand.lastName,
+            firstName     : createCommand.firstName,
             mail          : createCommand.mail,
             hashedPassWord: this.userService.createHashedPassword(createCommand.password),
         });
