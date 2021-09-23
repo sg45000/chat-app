@@ -3,7 +3,8 @@ import {UserModel} from '../../../domain/models/user/user.model';
 import {Injectable} from '@nestjs/common';
 import {PrismaClientService} from '../orm/prisma-client.service';
 import {UserMail} from '../../../domain/models/user/user.value';
-import {v4 as UUID} from 'uuid';
+import {EntityPId} from '../../../domain/models/common.value';
+import {MyUtil} from '../../../utils/my.util';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -23,12 +24,12 @@ export class UserRepository implements IUserRepository {
         });
         return UserModel.create(
             {
-                id            : userEntity.id,
                 firstName     : userEntity.firstName,
                 lastName      : userEntity.lastName,
                 mail          : userEntity.mail,
                 hashedPassWord: userEntity.hashedPw,
-            }
+            },
+            new EntityPId(userEntity.id),
         );
     }
 
@@ -43,13 +44,12 @@ export class UserRepository implements IUserRepository {
         }
         return UserModel.create(
             {
-                id            : userEntity.id,
                 firstName     : userEntity.firstName,
                 lastName      : userEntity.lastName,
                 mail          : userEntity.mail,
                 hashedPassWord: userEntity.hashedPw,
             },
-
+            new EntityPId(userEntity.id),
         );
     }
 }
@@ -57,22 +57,23 @@ export class UserRepository implements IUserRepository {
 @Injectable()
 export class UserRepositoryMock implements IUserRepository {
     async create(user: UserModel): Promise<UserModel> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(user);
         });
     }
 
     async findOneByMail(mail: UserMail): Promise<UserModel | null> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(
                 UserModel.create(
                     {
-                        id            : UUID(),
                         firstName     : 'あああ',
                         lastName      : 'いいい',
                         mail          : 'sample@googlea.com',
                         hashedPassWord: 'sdfghjk',
-                    })
+                    },
+                    new EntityPId(MyUtil.createUUID()),
+                ),
             );
         });
     }

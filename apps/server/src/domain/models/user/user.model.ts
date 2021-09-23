@@ -6,7 +6,6 @@ import {EntityPId} from '../common.value';
  * UserModelのプロパティinterface
  */
 export interface UserModelProps {
-    id?: EntityPId;
     name: UserName;
     mail: UserMail;
     hashedPassWord: UserHashedPass;
@@ -16,7 +15,6 @@ export interface UserModelProps {
  * UserModel生成の引数interface
  */
 export interface UserModelArgs {
-    id?: string;
     lastName: string;
     firstName: string;
     mail: string;
@@ -32,15 +30,16 @@ export class UserModel extends AbstractDomainModelObject<UserModelProps> {
     /**
      * ファクトリメソッド
      * @param args
+     * @param id
      */
-    static create(args: UserModelArgs): UserModel {
+    static create(args: UserModelArgs, id?: EntityPId): UserModel {
         return new UserModel(
             {
                 name          : new UserName({lastName: args.lastName, firstName: args.firstName}),
                 mail          : new UserMail(args.mail),
                 hashedPassWord: new UserHashedPass(args.hashedPassWord),
             },
-            args.id ? new EntityPId(args.id) : undefined,
+            this.getEntityPId(id)
         );
     }
 

@@ -48,6 +48,7 @@ export class UserAppService {
         if(!user) {
             throw new NotFoundException('メールアドレスまたはパスワードに誤りがあります。');
         }
-        return await this.sessionRepository.create(user);
+        const session = SessionModel.create(user);
+        return await this.sessionRepository.create(session);
     }
 }

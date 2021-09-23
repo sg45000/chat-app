@@ -7,9 +7,9 @@ interface DomainModelObjectProps {
 
 export abstract class AbstractDomainModelObject<T extends DomainModelObjectProps> {
     private readonly _props: T;
-    private readonly _id?: EntityPId;
+    private readonly _id: EntityPId;
 
-    protected constructor(_value: T, _id?: EntityPId) {
+    protected constructor(_value: T, _id: EntityPId) {
         this._props = Object.freeze(_value);
         this._id = _id;
     }
@@ -27,6 +27,17 @@ export abstract class AbstractDomainModelObject<T extends DomainModelObjectProps
 
     protected get props(): T {
         return this._props;
+    }
+
+    protected static getEntityPId(id?: EntityPId): EntityPId {
+        return id ? id : EntityPId.create();
+    }
+
+    /**
+     * ユーザーのIDを参照
+     */
+    get id(): EntityPId {
+        return this._id;
     }
 }
 
