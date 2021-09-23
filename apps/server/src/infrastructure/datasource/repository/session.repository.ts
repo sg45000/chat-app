@@ -1,21 +1,30 @@
 import {ISessionRepository} from '../../../domain/models/session/session.repository.interface';
-import {UserModel} from '../../../domain/models/user/user.model';
 import {SessionModel} from '../../../domain/models/session/session.model';
-import {Injectable, ServiceUnavailableException} from '@nestjs/common';
-import {MyUtil} from '../../../utils/my.util';
+import {Injectable} from '@nestjs/common';
+import {RedisClientService} from '../orm/redis-client.service';
 
 @Injectable()
 export class SessionRepository extends ISessionRepository {
-    create(user: UserModel): Promise<SessionModel> {
-        throw new ServiceUnavailableException();
+    constructor(
+        private readonly redisClientService: RedisClientService
+    ) {
+        super();
+    }
+    async create(session: SessionModel): Promise<SessionModel> {
+        try {
+            await this.redisClientService.set(session.user.id.value, session.id.value);
+        } catch (e) {
+            throw new Error();
+        }
+        return session;
     }
 }
 
 @Injectable()
 export class SessionRepositoryMock extends ISessionRepository {
-    create(user: UserModel): Promise<SessionModel> {
+    async create(session: SessionModel): Promise<SessionModel> {
         return new Promise((resolve)=>{
-            resolve(SessionModel.create(MyUtil.createUUID(), user));
+            resolve(session);
         });
     }
 }

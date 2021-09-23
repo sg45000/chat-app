@@ -1,10 +1,9 @@
-import {UserModel} from '../user/user.model';
 import {SessionModel} from './session.model';
 
 export abstract class ISessionRepository {
     /**
      * DBにセッションを登録する
-     * @param user
+     * @param session
      */
-    abstract create(user: UserModel): Promise<SessionModel>;
+    abstract create(session: SessionModel): Promise<SessionModel>;
 }
