@@ -1,14 +1,18 @@
 import {UserModel} from '../../domain/models/user/user.model';
-import {BadRequestException, Injectable} from '@nestjs/common';
+import {BadRequestException, Injectable, NotFoundException} from '@nestjs/common';
 import {IUserRepository} from '../../domain/models/user/user.repository.interface';
-import {UserCreateCommand} from '../commands/user.commands';
+import {SessionCreateCommand, UserCreateCommand} from '../commands/user.commands';
 import {UserService} from '../../domain/models/user/user.service';
+import {UserHashedPass, UserMail} from '../../domain/models/user/user.value';
+import {SessionModel} from '../../domain/models/session/session.model';
+import {ISessionRepository} from '../../domain/models/session/session.repository.interface';
 
 @Injectable()
 export class UserAppService {
     constructor(
         private readonly userService: UserService,
-        private readonly userRepository: IUserRepository
+        private readonly userRepository: IUserRepository,
+        private readonly sessionRepository: ISessionRepository,
     ) {
     }
 
@@ -30,5 +34,20 @@ export class UserAppService {
         }
 
         return await this.userRepository.create(user);
+    }
+
+    /**
+     * ユーザーの認証を行う。
+     */
+    async login(command: SessionCreateCommand): Promise<SessionModel> {
+        const user = await this.userService.identifyUser(
+            new UserMail(command.mail),
+            new UserHashedPass(this.userService.createHashedPassword(command.password)),
+        );
+
+        if(!user) {
+            throw new NotFoundException('メールアドレスまたはパスワードに誤りがあります。');
+        }
+        return await this.sessionRepository.create(user);
     }
 }

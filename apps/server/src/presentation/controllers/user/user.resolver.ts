@@ -1,5 +1,5 @@
 import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
-import {SignupUserRequest, UserResponse} from './user.dto';
+import {LoginUserRequest, SignupUserRequest, UserResponse} from './user.dto';
 import {UserAppService} from '../../../application/services/user.appservice';
 import {UserModel} from '../../../domain/models/user/user.model';
 
@@ -26,5 +26,11 @@ export class UserResolver {
     async signup(@Args('params') params: SignupUserRequest): Promise<UserResponse> {
         const user = await this.userAppService.signUpUser(params);
         return new UserResponse(user);
+    }
+
+    @Mutation(returns => UserResponse)
+    async login(@Args('params') params: LoginUserRequest): Promise<UserResponse> {
+        const session = await this.userAppService.login(params);
+        return new UserResponse(session.user);
     }
 }

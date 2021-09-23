@@ -21,6 +21,18 @@ export class SignupUserRequest {
     readonly password: string;
 }
 
+@InputType()
+export class LoginUserRequest {
+    @Field()
+    readonly mail: string;
+
+    @Field()
+    @MinLength(8, {message: 'ユーザーのパスワードは8文字以上に設定してください。'})
+    @MaxLength(16, {message: 'ユーザーのパスワードは16文字以下に設定してください。'})
+    @Matches(RegexConst.HALF_WIDTH_ALPHANUMERIC, {message: 'ユーザーのパスワードは英数字を設定してください。'})
+    readonly password: string;
+}
+
 @ObjectType()
 export class UserResponse {
     constructor(user: UserModel) {

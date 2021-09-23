@@ -16,11 +16,17 @@ type Query {
 
 type Mutation {
   signup(params: SignupUserRequest!): UserResponse!
+  login(params: LoginUserRequest!): UserResponse!
 }
 
 input SignupUserRequest {
   lastName: String!
   firstName: String!
+  mail: String!
+  password: String!
+}
+
+input LoginUserRequest {
   mail: String!
   password: String!
 }

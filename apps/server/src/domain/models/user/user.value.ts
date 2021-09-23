@@ -41,4 +41,6 @@ export class UserHashedPass extends AbstractValueObject<string> {
     constructor(value: string) {
         super(value);
     }
+
+    // fixme インスタンス生成時にハッシュ化した方がいい？
 }

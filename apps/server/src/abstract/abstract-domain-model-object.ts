@@ -25,7 +25,7 @@ export abstract class AbstractDomainModelObject<T extends DomainModelObjectProps
         return shallowEqual(this._id, o._id);
     }
 
-    get props(): T {
+    protected get props(): T {
         return this._props;
     }
 }
