@@ -2,6 +2,7 @@ import {ISessionRepository} from '../../../domain/models/session/session.reposit
 import {SessionModel} from '../../../domain/models/session/session.model';
 import {Injectable} from '@nestjs/common';
 import {RedisClientService} from '../orm/redis-client.service';
+import {EntityPId} from '../../../domain/models/common.value';
 
 @Injectable()
 export class SessionRepository extends ISessionRepository {
@@ -17,10 +18,24 @@ export class SessionRepository extends ISessionRepository {
             throw new Error();
         }
     }
+    async findOne(id: EntityPId): Promise<SessionModel | null> {
+        const response = await this.redisClientService.get(id.value);
+        if(!response) {
+            return null;
+        }
+        return SessionModel.reconstruct(id, EntityPId.reconstruct(response));
+    }
 }
 
 @Injectable()
 export class SessionRepositoryMock extends ISessionRepository {
     async create(session: SessionModel): Promise<void> {
+    }
+
+    async findOne(id: EntityPId): Promise<SessionModel | null> {
+
+        return new Promise((resolve)=>{
+            resolve(SessionModel.reconstruct(id, EntityPId.create()));
+        });
     }
 }

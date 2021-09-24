@@ -16,6 +16,15 @@ export class SessionModel extends AbstractDomainModelObject<SessionModelProps> {
         );
     }
 
+    static reconstruct(sessionId: EntityPId, userId: EntityPId) {
+        return new SessionModel(
+            {
+                userId
+            },
+            sessionId
+        );
+    }
+
     get userId(): EntityPId {
         return this.props.userId;
     }

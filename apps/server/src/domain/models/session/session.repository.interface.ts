@@ -1,4 +1,5 @@
 import {SessionModel} from './session.model';
+import {EntityPId} from '../common.value';
 
 export abstract class ISessionRepository {
     /**
@@ -7,5 +8,5 @@ export abstract class ISessionRepository {
      */
     abstract create(session: SessionModel): Promise<void>;
 
-    abstract findOne(key: string): Promise<SessionModel>
+    abstract findOne(id: EntityPId): Promise<SessionModel | null>
 }
