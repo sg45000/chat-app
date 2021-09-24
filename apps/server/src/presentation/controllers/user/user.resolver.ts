@@ -31,6 +31,6 @@ export class UserResolver {
     @Mutation(returns => UserResponse)
     async login(@Args('params') params: LoginUserRequest): Promise<UserResponse> {
         const session = await this.userAppService.login(params);
-        return new UserResponse(session.user);
+        return new UserResponse(session.userId.value);
     }
 }

@@ -6,4 +6,6 @@ export abstract class ISessionRepository {
      * @param session
      */
     abstract create(session: SessionModel): Promise<SessionModel>;
+
+    abstract findOne(key: string): Promise<SessionModel>
 }

@@ -3,20 +3,20 @@ import {EntityPId} from '../common.value';
 import {UserModel} from '../user/user.model';
 
 export interface SessionModelProps {
-    user: UserModel;
+    userId: EntityPId;
 }
 
 export class SessionModel extends AbstractDomainModelObject<SessionModelProps> {
     static create(user: UserModel): SessionModel {
         return new SessionModel(
             {
-                user,
+                userId: user.id,
             },
             EntityPId.create(),
         );
     }
 
-    get user(): UserModel {
-        return this.props.user;
+    get userId(): EntityPId {
+        return this.props.userId;
     }
 }
