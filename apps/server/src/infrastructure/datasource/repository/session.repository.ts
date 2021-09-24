@@ -10,21 +10,17 @@ export class SessionRepository extends ISessionRepository {
     ) {
         super();
     }
-    async create(session: SessionModel): Promise<SessionModel> {
+    async create(session: SessionModel): Promise<void> {
         try {
             await this.redisClientService.set(session.id.value, session.userId.value, 120 * 60);
         } catch (e) {
             throw new Error();
         }
-        return session;
     }
 }
 
 @Injectable()
 export class SessionRepositoryMock extends ISessionRepository {
-    async create(session: SessionModel): Promise<SessionModel> {
-        return new Promise((resolve)=>{
-            resolve(session);
-        });
+    async create(session: SessionModel): Promise<void> {
     }
 }

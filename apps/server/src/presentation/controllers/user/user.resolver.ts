@@ -30,7 +30,8 @@ export class UserResolver {
 
     @Mutation(returns => UserResponse)
     async login(@Args('params') params: LoginUserRequest): Promise<UserResponse> {
-        const session = await this.userAppService.login(params);
-        return new UserResponse(session.userId.value);
+        const loginOutput = await this.userAppService.login(params);
+        // fixme sessionをクッキーに
+        return new UserResponse(loginOutput.user);
     }
 }

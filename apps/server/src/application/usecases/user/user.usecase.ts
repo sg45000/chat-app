@@ -6,6 +6,7 @@ import {UserService} from '../../../domain/models/user/user.service';
 import {UserHashedPass, UserMail} from '../../../domain/models/user/user.value';
 import {SessionModel} from '../../../domain/models/session/session.model';
 import {ISessionRepository} from '../../../domain/models/session/session.repository.interface';
+import {UserLoginOutput} from './user.output';
 
 @Injectable()
 export class UserUsecase {
@@ -39,7 +40,7 @@ export class UserUsecase {
     /**
      * ユーザーの認証を行う。
      */
-    async login(command: SessionCreateCommand): Promise<SessionModel> {
+    async login(command: SessionCreateCommand): Promise<UserLoginOutput> {
         const user = await this.userService.identifyUser(
             new UserMail(command.mail),
             new UserHashedPass(this.userService.createHashedPassword(command.password)),
@@ -49,6 +50,7 @@ export class UserUsecase {
             throw new NotFoundException('メールアドレスまたはパスワードに誤りがあります。');
         }
         const session = SessionModel.create(user);
-        return await this.sessionRepository.create(session);
+        await this.sessionRepository.create(session);
+        return new UserLoginOutput(session, user);
     }
 }
