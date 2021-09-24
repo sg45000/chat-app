@@ -9,4 +9,16 @@ export class MyUtil {
         return UUID();
     }
 
+    /**
+     * 指定秒数間処理を停止する
+     * @param sec
+     */
+    static async sleep(sec: number): Promise<void> {
+        return new Promise((resolve)=>{
+            setTimeout(()=>{
+                resolve();
+            }, sec * 1000);
+        });
+    }
+
 }

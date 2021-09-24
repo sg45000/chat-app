@@ -7,8 +7,9 @@ export class RedisClientService {
 
     constructor() {
         this.client = new IORedis({
-            port: 6379,
-            host: 'localhost',
+            port          : 6379,
+            host          : 'localhost',
+            commandTimeout: 3 * 1000,
         }); // fixme configServiceで置き換え
     }
 
@@ -16,9 +17,10 @@ export class RedisClientService {
      * redisに値をセット
      * @param key
      * @param value
+     * @param timeoutSec
      */
-    async set(key: string, value: string | number) {
-        await this.client.set(key,value);
+    async set(key: string, value: string | number, timeoutSec: number) {
+        await this.client.set(key,value, 'ex', timeoutSec);
     }
 
     /**

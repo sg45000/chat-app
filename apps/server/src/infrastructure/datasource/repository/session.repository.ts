@@ -12,7 +12,7 @@ export class SessionRepository extends ISessionRepository {
     }
     async create(session: SessionModel): Promise<SessionModel> {
         try {
-            await this.redisClientService.set(session.user.id.value, session.id.value);
+            await this.redisClientService.set(session.user.id.value, session.id.value, 120 * 60);
         } catch (e) {
             throw new Error();
         }
