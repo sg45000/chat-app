@@ -4,7 +4,7 @@ import {IllegalArgumentException} from '../../types/error.types';
 import {v4 as UUID} from 'uuid';
 
 export class EntityPId extends AbstractValueObject<string> {
-    constructor(value: string) {
+    protected constructor(value: string) {
         super(value);
         if(!isUUID(value)) {
             throw new IllegalArgumentException('uuidを指定してください。');
@@ -16,5 +16,13 @@ export class EntityPId extends AbstractValueObject<string> {
      */
     static create(): EntityPId {
         return new EntityPId(UUID());
+    }
+
+    /**
+     * 再構築用のファクトリメソッド
+     * @param id
+     */
+    static reconstruct(id: string): EntityPId {
+        return new EntityPId(id);
     }
 }

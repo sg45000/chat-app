@@ -4,7 +4,6 @@ import {Injectable} from '@nestjs/common';
 import {PrismaClientService} from '../orm/prisma-client.service';
 import {UserMail} from '../../../domain/models/user/user.value';
 import {EntityPId} from '../../../domain/models/common.value';
-import {MyUtil} from '../../../utils/my.util';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -23,14 +22,14 @@ export class UserRepository implements IUserRepository {
                 hashedPw : user.hashedPassWord.value,
             },
         });
-        return UserModel.create(
+        return UserModel.reconstruct(
             {
                 firstName     : userEntity.firstName,
                 lastName      : userEntity.lastName,
                 mail          : userEntity.mail,
                 hashedPassWord: userEntity.hashedPw,
             },
-            new EntityPId(userEntity.id),
+            EntityPId.reconstruct(userEntity.id),
         );
     }
 
@@ -43,14 +42,14 @@ export class UserRepository implements IUserRepository {
         if (!userEntity) {
             return null;
         }
-        return UserModel.create(
+        return UserModel.reconstruct(
             {
                 firstName     : userEntity.firstName,
                 lastName      : userEntity.lastName,
                 mail          : userEntity.mail,
                 hashedPassWord: userEntity.hashedPw,
             },
-            new EntityPId(userEntity.id),
+            EntityPId.reconstruct(userEntity.id),
         );
     }
 }
@@ -66,14 +65,14 @@ export class UserRepositoryMock implements IUserRepository {
     async findOneByMail(mail: UserMail): Promise<UserModel | null> {
         return new Promise((resolve) => {
             resolve(
-                UserModel.create(
+                UserModel.reconstruct(
                     {
                         firstName     : 'あああ',
                         lastName      : 'いいい',
                         mail          : 'sample@googlea.com',
                         hashedPassWord: 'sdfghjk',
                     },
-                    new EntityPId(MyUtil.createUUID()),
+                    EntityPId.create(),
                 ),
             );
         });

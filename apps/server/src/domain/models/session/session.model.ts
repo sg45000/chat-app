@@ -7,12 +7,12 @@ export interface SessionModelProps {
 }
 
 export class SessionModel extends AbstractDomainModelObject<SessionModelProps> {
-    static create(user: UserModel, id?: EntityPId): SessionModel {
+    static create(user: UserModel): SessionModel {
         return new SessionModel(
             {
                 user,
             },
-            this.getEntityPId(id)
+            EntityPId.create(),
         );
     }
 

@@ -29,17 +29,33 @@ export interface UserModelArgs {
 export class UserModel extends AbstractDomainModelObject<UserModelProps> {
     /**
      * ファクトリメソッド
+     * idも新しく採番
      * @param args
-     * @param id
      */
-    static create(args: UserModelArgs, id?: EntityPId): UserModel {
+    static create(args: UserModelArgs): UserModel {
         return new UserModel(
             {
                 name          : new UserName({lastName: args.lastName, firstName: args.firstName}),
                 mail          : new UserMail(args.mail),
                 hashedPassWord: new UserHashedPass(args.hashedPassWord),
             },
-            this.getEntityPId(id)
+            EntityPId.create()
+        );
+    }
+
+    /**
+     * 再構築用のファクトリメソッド
+     * @param args
+     * @param id
+     */
+    static reconstruct(args: UserModelArgs, id: EntityPId): UserModel {
+        return new UserModel(
+            {
+                name          : new UserName({lastName: args.lastName, firstName: args.firstName}),
+                mail          : new UserMail(args.mail),
+                hashedPassWord: new UserHashedPass(args.hashedPassWord),
+            },
+            id,
         );
     }
 

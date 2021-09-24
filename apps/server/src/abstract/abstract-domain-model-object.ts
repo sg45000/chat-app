@@ -29,10 +29,6 @@ export abstract class AbstractDomainModelObject<T extends DomainModelObjectProps
         return this._props;
     }
 
-    protected static getEntityPId(id?: EntityPId): EntityPId {
-        return id ? id : EntityPId.create();
-    }
-
     /**
      * ユーザーのIDを参照
      */
