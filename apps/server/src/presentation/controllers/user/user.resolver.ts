@@ -1,12 +1,12 @@
 import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
 import {LoginUserRequest, SignupUserRequest, UserResponse} from './user.dto';
-import {UserAppService} from '../../../application/services/user.appservice';
+import {UserUsecase} from '../../../application/usecases/user/user.usecase';
 import {UserModel} from '../../../domain/models/user/user.model';
 
 @Resolver(UserResponse)
 export class UserResolver {
     constructor(
-        private readonly userAppService: UserAppService,
+        private readonly userAppService: UserUsecase,
     ) {
     }
 

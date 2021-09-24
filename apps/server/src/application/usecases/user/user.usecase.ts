@@ -1,14 +1,14 @@
-import {UserModel} from '../../domain/models/user/user.model';
+import {UserModel} from '../../../domain/models/user/user.model';
 import {BadRequestException, Injectable, NotFoundException} from '@nestjs/common';
-import {IUserRepository} from '../../domain/models/user/user.repository.interface';
-import {SessionCreateCommand, UserCreateCommand} from '../commands/user.commands';
-import {UserService} from '../../domain/models/user/user.service';
-import {UserHashedPass, UserMail} from '../../domain/models/user/user.value';
-import {SessionModel} from '../../domain/models/session/session.model';
-import {ISessionRepository} from '../../domain/models/session/session.repository.interface';
+import {IUserRepository} from '../../../domain/models/user/user.repository.interface';
+import {SessionCreateCommand, UserCreateCommand} from '../../commands/user.commands';
+import {UserService} from '../../../domain/models/user/user.service';
+import {UserHashedPass, UserMail} from '../../../domain/models/user/user.value';
+import {SessionModel} from '../../../domain/models/session/session.model';
+import {ISessionRepository} from '../../../domain/models/session/session.repository.interface';
 
 @Injectable()
-export class UserAppService {
+export class UserUsecase {
     constructor(
         private readonly userService: UserService,
         private readonly userRepository: IUserRepository,

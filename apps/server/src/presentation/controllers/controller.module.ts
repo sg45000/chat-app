@@ -1,6 +1,6 @@
 import {Module} from '@nestjs/common';
 import {UserResolver} from './user/user.resolver';
-import {AppServiceModule} from '../../application/services/appService.module';
+import {UsecaseModule} from '../../application/usecases/usecase.module';
 import {GraphQLModule} from '@nestjs/graphql';
 import {join} from 'path';
 
@@ -11,7 +11,7 @@ import {join} from 'path';
             installSubscriptionHandlers: true,
             autoSchemaFile             : join(process.cwd(), '..', 'common', 'types', 'schema.graphql'),
         }),
-        AppServiceModule,
+        UsecaseModule,
     ]
 })
 export class ControllerModule {}

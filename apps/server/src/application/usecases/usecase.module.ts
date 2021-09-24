@@ -1,15 +1,15 @@
 import {Module} from '@nestjs/common';
-import {UserAppService} from './user.appservice';
+import {UserUsecase} from './user/user.usecase';
 import {DomainModelServiceModule} from '../../domain/domainModelService.module';
 import {RepositoryModule} from '../../infrastructure/datasource/repository/repository.module';
 
 @Module({
     controllers: [],
-    providers  : [UserAppService],
+    providers  : [UserUsecase],
     imports    : [
         DomainModelServiceModule,
         RepositoryModule,
     ],
-    exports: [UserAppService],
+    exports: [UserUsecase],
 })
-export class AppServiceModule {}
+export class UsecaseModule {}
