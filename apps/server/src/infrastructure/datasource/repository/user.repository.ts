@@ -33,6 +33,24 @@ export class UserRepository implements IUserRepository {
         );
     }
 
+    async findOneById(id: EntityPId): Promise<UserModel | null> {
+        const userEntity = await this.prismaClientService.user.findUnique({
+            where: {id: id.value}
+        });
+        if (!userEntity) {
+            return null;
+        }
+        return UserModel.reconstruct(
+            {
+                firstName     : userEntity.firstName,
+                lastName      : userEntity.lastName,
+                mail          : userEntity.mail,
+                hashedPassWord: userEntity.hashedPw,
+            },
+            EntityPId.reconstruct(userEntity.id),
+        );
+    }
+
     async findOneByMail(mail: UserMail): Promise<UserModel | null> {
         const userEntity = await this.prismaClientService.user.findFirst({
             where: {
@@ -59,6 +77,22 @@ export class UserRepositoryMock implements IUserRepository {
     async create(user: UserModel): Promise<UserModel> {
         return new Promise((resolve) => {
             resolve(user);
+        });
+    }
+
+    async findOneById(id: EntityPId): Promise<UserModel | null> {
+        return new Promise((resolve) => {
+            resolve(
+                UserModel.reconstruct(
+                    {
+                        firstName     : 'あああ',
+                        lastName      : 'いいい',
+                        mail          : 'sample@googlea.com',
+                        hashedPassWord: 'sdfghjk',
+                    },
+                    EntityPId.create(),
+                ),
+            );
         });
     }
 

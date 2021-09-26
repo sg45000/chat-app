@@ -1,5 +1,6 @@
 import {UserModel} from './user.model';
 import {UserMail} from './user.value';
+import {EntityPId} from '../common.value';
 
 export abstract class IUserRepository {
   /**
@@ -7,6 +8,12 @@ export abstract class IUserRepository {
    * @param user
    */
   abstract create(user: UserModel): Promise<UserModel>;
+
+  /**
+   * IDをキーにDBからユーザーを取得する
+   * @param id
+   */
+  abstract findOneById(id: EntityPId): Promise<UserModel | null>;
 
   /**
    * メールアドレスをキーにDBからユーザーを取得する
