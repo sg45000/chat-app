@@ -11,7 +11,7 @@ type UserResponse {
 }
 
 type Query {
-  sayHello: String!
+  sayHello: UserResponse!
 }
 
 type Mutation {
