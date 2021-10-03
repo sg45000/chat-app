@@ -10,13 +10,24 @@ type UserResponse {
   mail: String!
 }
 
+type OwnUserResponse {
+  """名前"""
+  name: String!
+
+  """メールアドレス"""
+  mail: String!
+
+  """セッションID"""
+  sessionId: String!
+}
+
 type Query {
-  sayHello: UserResponse!
+  ownUser: UserResponse!
 }
 
 type Mutation {
   signup(params: SignupUserRequest!): UserResponse!
-  login(params: LoginUserRequest!): UserResponse!
+  login(params: LoginUserRequest!): OwnUserResponse!
 }
 
 input SignupUserRequest {

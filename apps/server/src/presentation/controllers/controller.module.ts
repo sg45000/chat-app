@@ -3,6 +3,7 @@ import {UserResolver} from './user/user.resolver';
 import {UsecaseModule} from '../../application/usecases/usecase.module';
 import {GraphQLModule} from '@nestjs/graphql';
 import {join} from 'path';
+import {RepositoryModule} from '../../infrastructure/datasource/repository/repository.module';
 
 @Module({
     providers: [UserResolver],
@@ -12,6 +13,7 @@ import {join} from 'path';
             autoSchemaFile             : join(process.cwd(), '..', 'common', 'types', 'schema.graphql'),
         }),
         UsecaseModule,
+        RepositoryModule
     ]
 })
 export class ControllerModule {}

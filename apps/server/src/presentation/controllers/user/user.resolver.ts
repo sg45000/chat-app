@@ -1,7 +1,10 @@
 import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
-import {LoginUserRequest, SignupUserRequest, UserResponse} from './user.dto';
+import {LoginUserRequest, OwnUserResponse, SignupUserRequest, UserResponse} from './user.dto';
 import {UserUsecase} from '../../../application/usecases/user/user.usecase';
 import {UserModel} from '../../../domain/models/user/user.model';
+import {UseGuards} from '@nestjs/common';
+import {User} from '../../../decorators/user.decorator';
+import {AuthGuard} from '../../authentication/auth.guard';
 
 @Resolver(UserResponse)
 export class UserResolver {
@@ -10,14 +13,15 @@ export class UserResolver {
     ) {
     }
 
-    @Query(() => String)
-    sayHello(): UserResponse {
+    @Query(() => UserResponse)
+    @UseGuards(AuthGuard)
+    ownUser(@User() user: UserModel): UserResponse {
         return new UserResponse(
             UserModel.create({
-                lastName      : 'サンプル',
-                firstName     : '太郎',
-                mail          : 'sample@nnn.co.jp',
-                hashedPassWord: 'password',
+                lastName      : user.name.value.lastName,
+                firstName     : user.name.value.firstName,
+                mail          : user.mail.value,
+                hashedPassWord: user.hashedPassWord.value,
             })
         );
     }
@@ -28,10 +32,9 @@ export class UserResolver {
         return new UserResponse(user);
     }
 
-    @Mutation(returns => UserResponse)
+    @Mutation(returns => OwnUserResponse)
     async login(@Args('params') params: LoginUserRequest): Promise<UserResponse> {
         const loginOutput = await this.userAppService.login(params);
-        // fixme sessionをクッキーに
-        return new UserResponse(loginOutput.user);
+        return new OwnUserResponse(loginOutput.user, loginOutput.session);
     }
 }

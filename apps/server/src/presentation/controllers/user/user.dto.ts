@@ -2,6 +2,7 @@ import {Field, InputType, ObjectType} from '@nestjs/graphql';
 import {UserModel} from '../../../domain/models/user/user.model';
 import {Matches, MaxLength, MinLength} from 'class-validator';
 import {RegexConst} from '../../../const/regex.const';
+import {SessionModel} from '../../../domain/models/session/session.model';
 
 @InputType()
 export class SignupUserRequest {
@@ -43,4 +44,19 @@ export class UserResponse {
     readonly name: string;
     @Field({description: 'メールアドレス'})
     readonly mail: string;
+}
+
+@ObjectType()
+export class OwnUserResponse {
+    constructor(user: UserModel, session: SessionModel) {
+        this.name = user.name.value.lastName + user.name.value.firstName;
+        this.mail = user.mail.value;
+        this.sessionId = session.id.value;
+    }
+    @Field({description: '名前'})
+    readonly name: string;
+    @Field({description: 'メールアドレス'})
+    readonly mail: string;
+    @Field({description: 'セッションID'})
+    readonly sessionId: string;
 }
