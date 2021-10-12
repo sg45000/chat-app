@@ -3,10 +3,10 @@ import {EntityPId} from '../common.value';
 import {UserModel} from '../user/user.model';
 
 export interface SessionModelProps {
-    userId: EntityPId<'user'>;
+    userId: EntityPId<UserModel>;
 }
 
-export class SessionModel extends AbstractDomainModelObject<SessionModelProps, 'session'> {
+export class SessionModel extends AbstractDomainModelObject<SessionModelProps, SessionModel> {
     static create(user: UserModel): SessionModel {
         return new SessionModel(
             {
@@ -16,7 +16,7 @@ export class SessionModel extends AbstractDomainModelObject<SessionModelProps, '
         );
     }
 
-    static reconstruct(sessionId: EntityPId<'session'>, userId: EntityPId<'user'>) {
+    static reconstruct(sessionId: EntityPId<SessionModel>, userId: EntityPId<UserModel>) {
         return new SessionModel(
             {
                 userId
@@ -25,7 +25,7 @@ export class SessionModel extends AbstractDomainModelObject<SessionModelProps, '
         );
     }
 
-    get userId(): EntityPId<'user'> {
+    get userId(): EntityPId<UserModel> {
         return this.props.userId;
     }
 }

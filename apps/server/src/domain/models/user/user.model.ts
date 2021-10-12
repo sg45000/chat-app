@@ -26,7 +26,7 @@ export interface UserModelArgs {
  * ユーザーのドメインモデル
  * インスタンス生成は静的なcreateメソッドで行う
  */
-export class UserModel extends AbstractDomainModelObject<UserModelProps, 'user'> {
+export class UserModel extends AbstractDomainModelObject<UserModelProps, UserModel> {
     /**
      * ファクトリメソッド
      * idも新しく採番
@@ -48,7 +48,7 @@ export class UserModel extends AbstractDomainModelObject<UserModelProps, 'user'>
      * @param args
      * @param id
      */
-    static reconstruct(args: UserModelArgs, id: EntityPId<'user'>): UserModel {
+    static reconstruct(args: UserModelArgs, id: EntityPId<UserModel>): UserModel {
         return new UserModel(
             {
                 name          : new UserName({lastName: args.lastName, firstName: args.firstName}),

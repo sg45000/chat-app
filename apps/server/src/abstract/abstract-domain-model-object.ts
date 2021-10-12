@@ -1,11 +1,11 @@
 import {shallowEqual} from 'shallow-equal-object';
 import {EntityPId} from '../domain/models/common.value';
+import {DomainModelTypes} from '../domain/DomainModel.types';
 
 interface DomainModelObjectProps {
     [index: string]: any;
 }
 
-export type DomainModelTypes = 'user' | 'session';
 
 export abstract class AbstractDomainModelObject<T extends DomainModelObjectProps, MODEL_TYPE extends DomainModelTypes> {
     private readonly _props: T;

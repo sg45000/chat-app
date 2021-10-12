@@ -13,7 +13,7 @@ export abstract class IUserRepository {
    * IDをキーにDBからユーザーを取得する
    * @param id
    */
-  abstract findOneById(id: EntityPId<'user'>): Promise<UserModel | null>;
+  abstract findOneById(id: EntityPId<UserModel>): Promise<UserModel | null>;
 
   /**
    * メールアドレスをキーにDBからユーザーを取得する
