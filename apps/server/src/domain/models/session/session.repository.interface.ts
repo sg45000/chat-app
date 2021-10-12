@@ -8,5 +8,5 @@ export abstract class ISessionRepository {
      */
     abstract create(session: SessionModel): Promise<void>;
 
-    abstract findOne(id: EntityPId): Promise<SessionModel | null>
+    abstract findOne(id: EntityPId<'session'>): Promise<SessionModel | null>
 }

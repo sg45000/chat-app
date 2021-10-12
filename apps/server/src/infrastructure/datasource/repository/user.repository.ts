@@ -33,7 +33,7 @@ export class UserRepository implements IUserRepository {
         );
     }
 
-    async findOneById(id: EntityPId): Promise<UserModel | null> {
+    async findOneById(id: EntityPId<'user'>): Promise<UserModel | null> {
         const userEntity = await this.prismaClientService.user.findUnique({
             where: {id: id.value}
         });
@@ -80,7 +80,7 @@ export class UserRepositoryMock implements IUserRepository {
         });
     }
 
-    async findOneById(id: EntityPId): Promise<UserModel | null> {
+    async findOneById(id: EntityPId<'user'>): Promise<UserModel | null> {
         return new Promise((resolve) => {
             resolve(
                 UserModel.reconstruct(
