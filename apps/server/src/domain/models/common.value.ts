@@ -1,8 +1,8 @@
-import {AbstractValueObject} from '../../abstract/abstract-value-object';
 import {isUUID} from '@nestjs/common/utils/is-uuid';
 import {IllegalArgumentException} from '../../types/error.types';
 import {v4 as UUID} from 'uuid';
 import {DomainModelTypes} from '../DomainModel.types';
+import {AbstractValueObject} from '../abstract/abstract-value-object';
 
 export class EntityPId<MODEL_TYPE extends DomainModelTypes> extends AbstractValueObject<string> {
 

@@ -1,5 +1,5 @@
 import {shallowEqual} from 'shallow-equal-object';
-import {StringUtil} from '../utils/String.util';
+import {StringUtil} from '../../utils/String.util';
 
 export abstract class AbstractValueObject<T> {
     protected readonly _value: T;

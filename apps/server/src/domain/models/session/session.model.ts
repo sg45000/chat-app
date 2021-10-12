@@ -1,6 +1,6 @@
-import {AbstractDomainModelObject} from '../../../abstract/abstract-domain-model-object';
 import {EntityPId} from '../common.value';
 import {UserModel} from '../user/user.model';
+import {AbstractDomainModelObject} from '../../abstract/abstract-domain-model-object';
 
 export interface SessionModelProps {
     userId: EntityPId<UserModel>;

@@ -1,6 +1,6 @@
 import {shallowEqual} from 'shallow-equal-object';
-import {EntityPId} from '../domain/models/common.value';
-import {DomainModelTypes} from '../domain/DomainModel.types';
+import {EntityPId} from '../models/common.value';
+import {DomainModelTypes} from '../DomainModel.types';
 
 interface DomainModelObjectProps {
     [index: string]: any;

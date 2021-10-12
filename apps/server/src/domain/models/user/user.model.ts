@@ -1,6 +1,6 @@
 import {UserHashedPass, UserMail, UserName} from './user.value';
-import {AbstractDomainModelObject} from '../../../abstract/abstract-domain-model-object';
 import {EntityPId} from '../common.value';
+import {AbstractDomainModelObject} from '../../abstract/abstract-domain-model-object';
 
 /**
  * UserModelのプロパティinterface
