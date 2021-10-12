@@ -1,6 +1,6 @@
 import {UserHashedPass, UserMail, UserName} from './user.value';
-import {AbstractDomainModelObject} from '../../../abstract/abstract-domain-model-object';
 import {EntityPId} from '../common.value';
+import {AbstractDomainModelObject} from '../../abstract/abstract-domain-model-object';
 
 /**
  * UserModelのプロパティinterface
@@ -26,7 +26,7 @@ export interface UserModelArgs {
  * ユーザーのドメインモデル
  * インスタンス生成は静的なcreateメソッドで行う
  */
-export class UserModel extends AbstractDomainModelObject<UserModelProps> {
+export class UserModel extends AbstractDomainModelObject<UserModelProps, UserModel> {
     /**
      * ファクトリメソッド
      * idも新しく採番
@@ -48,7 +48,7 @@ export class UserModel extends AbstractDomainModelObject<UserModelProps> {
      * @param args
      * @param id
      */
-    static reconstruct(args: UserModelArgs, id: EntityPId): UserModel {
+    static reconstruct(args: UserModelArgs, id: EntityPId<UserModel>): UserModel {
         return new UserModel(
             {
                 name          : new UserName({lastName: args.lastName, firstName: args.firstName}),

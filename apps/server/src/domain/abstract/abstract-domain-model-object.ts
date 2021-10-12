@@ -1,15 +1,17 @@
 import {shallowEqual} from 'shallow-equal-object';
-import {EntityPId} from '../domain/models/common.value';
+import {EntityPId} from '../models/common.value';
+import {DomainModelTypes} from '../DomainModel.types';
 
 interface DomainModelObjectProps {
     [index: string]: any;
 }
 
-export abstract class AbstractDomainModelObject<T extends DomainModelObjectProps> {
-    private readonly _props: T;
-    private readonly _id: EntityPId;
 
-    protected constructor(_value: T, _id: EntityPId) {
+export abstract class AbstractDomainModelObject<T extends DomainModelObjectProps, MODEL_TYPE extends DomainModelTypes> {
+    private readonly _props: T;
+    private readonly _id: EntityPId<MODEL_TYPE>;
+
+    protected constructor(_value: T, _id: EntityPId<MODEL_TYPE>) {
         this._props = Object.freeze(_value);
         this._id = _id;
     }
@@ -18,7 +20,7 @@ export abstract class AbstractDomainModelObject<T extends DomainModelObjectProps
      * Id同士を比較する
      * @param o
      */
-    equals(o?: AbstractDomainModelObject<T>): boolean {
+    equals(o?: AbstractDomainModelObject<T, MODEL_TYPE>): boolean {
         if (o === undefined) {
             return false;
         }
@@ -32,7 +34,7 @@ export abstract class AbstractDomainModelObject<T extends DomainModelObjectProps
     /**
      * ユーザーのIDを参照
      */
-    get id(): EntityPId {
+    get id(): EntityPId<MODEL_TYPE> {
         return this._id;
     }
 }

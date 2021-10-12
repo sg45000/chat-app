@@ -18,7 +18,7 @@ export class SessionRepository extends ISessionRepository {
             throw new Error();
         }
     }
-    async findOne(id: EntityPId): Promise<SessionModel | null> {
+    async findOne(id: EntityPId<SessionModel>): Promise<SessionModel | null> {
         const response = await this.redisClientService.get(id.value);
         if(!response) {
             return null;
@@ -32,7 +32,7 @@ export class SessionRepositoryMock extends ISessionRepository {
     async create(session: SessionModel): Promise<void> {
     }
 
-    async findOne(id: EntityPId): Promise<SessionModel | null> {
+    async findOne(id: EntityPId<SessionModel>): Promise<SessionModel | null> {
 
         return new Promise((resolve)=>{
             resolve(SessionModel.reconstruct(id, EntityPId.create()));

@@ -1,12 +1,12 @@
-import {AbstractDomainModelObject} from '../../../abstract/abstract-domain-model-object';
 import {EntityPId} from '../common.value';
 import {UserModel} from '../user/user.model';
+import {AbstractDomainModelObject} from '../../abstract/abstract-domain-model-object';
 
 export interface SessionModelProps {
-    userId: EntityPId;
+    userId: EntityPId<UserModel>;
 }
 
-export class SessionModel extends AbstractDomainModelObject<SessionModelProps> {
+export class SessionModel extends AbstractDomainModelObject<SessionModelProps, SessionModel> {
     static create(user: UserModel): SessionModel {
         return new SessionModel(
             {
@@ -16,7 +16,7 @@ export class SessionModel extends AbstractDomainModelObject<SessionModelProps> {
         );
     }
 
-    static reconstruct(sessionId: EntityPId, userId: EntityPId) {
+    static reconstruct(sessionId: EntityPId<SessionModel>, userId: EntityPId<UserModel>) {
         return new SessionModel(
             {
                 userId
@@ -25,7 +25,7 @@ export class SessionModel extends AbstractDomainModelObject<SessionModelProps> {
         );
     }
 
-    get userId(): EntityPId {
+    get userId(): EntityPId<UserModel> {
         return this.props.userId;
     }
 }

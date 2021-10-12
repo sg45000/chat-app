@@ -1,6 +1,6 @@
 import {IllegalArgumentException} from '../../../types/error.types';
 import {RegexConst} from '../../../const/regex.const';
-import {AbstractValueObject} from '../../../abstract/abstract-value-object';
+import {AbstractValueObject} from '../../abstract/abstract-value-object';
 
 export interface UserNameValue {
     lastName: string;
