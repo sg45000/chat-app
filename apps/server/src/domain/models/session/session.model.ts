@@ -16,7 +16,7 @@ export class SessionModel extends AbstractDomainModelObject<SessionModelProps, S
         );
     }
 
-    static reconstruct(sessionId: EntityPId<SessionModel>, userId: EntityPId<UserModel>) {
+    static reconstruct(sessionId: EntityPId<SessionModel>, userId: EntityPId<UserModel>): SessionModel {
         return new SessionModel(
             {
                 userId
