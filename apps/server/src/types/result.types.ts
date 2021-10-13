@@ -1,6 +1,6 @@
-type Result<T, E> = OK<T, E> | NG<T, E>
+export type Result<T, E> = OK<T, E> | NG<T, E>;
 
-class OK<T, E> {
+export class OK<T, E> {
     constructor(readonly value: T) {}
     private readonly type = 'success' as const;
     isSuccess(): this is OK<T, E> {
@@ -11,7 +11,7 @@ class OK<T, E> {
     }
 }
 
-class NG<T, E> {
+export class NG<T, E> {
     constructor(readonly value: E) {}
     private readonly type = 'failure' as const;
     isSuccess(): this is OK<T, E> {
