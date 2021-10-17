@@ -21,8 +21,14 @@ type OwnUserResponse {
   sessionId: String!
 }
 
+type RoomResponse {
+  id: String!
+  name: String!
+}
+
 type Query {
   ownUser: UserResponse!
+  rooms: [RoomResponse!]!
 }
 
 type Mutation {

@@ -59,4 +59,8 @@ export class RoomModel extends AbstractDomainModelObject<RoomModelProps, RoomMod
     exceedMembersLimit(): boolean {
         return this.MAX_NUM_MEMBERS <= this.countMember();
     }
+
+    get name(): RoomName {
+        return this.props.name;
+    }
 }

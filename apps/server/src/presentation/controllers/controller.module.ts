@@ -4,9 +4,10 @@ import {UsecaseModule} from '../../application/usecases/usecase.module';
 import {GraphQLModule} from '@nestjs/graphql';
 import {join} from 'path';
 import {RepositoryModule} from '../../infrastructure/datasource/repository/repository.module';
+import {RoomResolver} from './room/room.resolver';
 
 @Module({
-    providers: [UserResolver],
+    providers: [UserResolver, RoomResolver],
     imports  : [
         GraphQLModule.forRoot({
             installSubscriptionHandlers: true,

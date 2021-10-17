@@ -4,6 +4,8 @@ import {IUserRepository} from '../../../domain/models/user/user.repository.inter
 import {OrmModule} from '../orm/orm.module';
 import {ISessionRepository} from '../../../domain/models/session/session.repository.interface';
 import {SessionRepository, SessionRepositoryMock} from './session.repository';
+import {IRoomRepository} from '../../../domain/models/room/room.repository.interface';
+import {MockRoomRepository} from './room.repository';
 
 const providers: Provider[] = [
     {
@@ -19,12 +21,16 @@ const providers: Provider[] = [
             process.env.NODE_ENV === 'testing'
                 ? SessionRepositoryMock
                 : SessionRepository,
+    },
+    {
+        provide : IRoomRepository,
+        useClass: MockRoomRepository, //fixme
     }
 ];
 @Module({
     controllers: [],
     providers  : [...providers],
     imports    : [OrmModule],
-    exports    : [IUserRepository, ISessionRepository]
+    exports    : [IUserRepository, ISessionRepository, IRoomRepository]
 })
 export class RepositoryModule {}
