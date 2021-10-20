@@ -2,7 +2,7 @@ import {IUserRepository} from '../../../domain/models/user/user.repository.inter
 import {UserModel} from '../../../domain/models/user/user.model';
 import {Injectable} from '@nestjs/common';
 import {PrismaClientService} from '../orm/prisma-client.service';
-import {UserMail} from '../../../domain/models/user/user.value';
+import {UserHashedPass, UserMail} from '../../../domain/models/user/user.value';
 import {EntityPId} from '../../../domain/models/common.value';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class UserRepository implements IUserRepository {
                 firstName     : userEntity.firstName,
                 lastName      : userEntity.lastName,
                 mail          : userEntity.mail,
-                hashedPassWord: userEntity.hashedPw,
+                hashedPassWord: UserHashedPass.reconstruct(userEntity.hashedPw),
             },
             EntityPId.reconstruct(userEntity.id),
         );
@@ -45,7 +45,7 @@ export class UserRepository implements IUserRepository {
                 firstName     : userEntity.firstName,
                 lastName      : userEntity.lastName,
                 mail          : userEntity.mail,
-                hashedPassWord: userEntity.hashedPw,
+                hashedPassWord: UserHashedPass.reconstruct(userEntity.hashedPw),
             },
             EntityPId.reconstruct(userEntity.id),
         );
@@ -65,7 +65,7 @@ export class UserRepository implements IUserRepository {
                 firstName     : userEntity.firstName,
                 lastName      : userEntity.lastName,
                 mail          : userEntity.mail,
-                hashedPassWord: userEntity.hashedPw,
+                hashedPassWord: UserHashedPass.reconstruct(userEntity.hashedPw),
             },
             EntityPId.reconstruct(userEntity.id),
         );
@@ -88,7 +88,7 @@ export class UserRepositoryMock implements IUserRepository {
                         firstName     : 'あああ',
                         lastName      : 'いいい',
                         mail          : 'sample@googlea.com',
-                        hashedPassWord: 'sdfghjk',
+                        hashedPassWord: UserHashedPass.toHash('123456789'),
                     },
                     EntityPId.create(),
                 ),
@@ -104,7 +104,7 @@ export class UserRepositoryMock implements IUserRepository {
                         firstName     : 'あああ',
                         lastName      : 'いいい',
                         mail          : 'sample@googlea.com',
-                        hashedPassWord: 'sdfghjk',
+                        hashedPassWord: UserHashedPass.toHash('123456789'),
                     },
                     EntityPId.create(),
                 ),

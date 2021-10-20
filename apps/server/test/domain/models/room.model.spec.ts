@@ -1,5 +1,6 @@
 import {RoomModel, RoomModelArgs} from '../../../src/domain/models/room/room.model';
 import {UserModel, UserModelArgs} from '../../../src/domain/models/user/user.model';
+import {UserHashedPass} from '../../../src/domain/models/user/user.value';
 
 let users: UserModel[];
 beforeEach(() =>{
@@ -9,7 +10,7 @@ beforeEach(() =>{
             firstName     : `太郎${i}`,
             lastName      : '田中',
             mail          : `abcdef-3897ryhiuw${i}@gmail.com`,
-            hashedPassWord: 'tnajrnejaf3r4et',
+            hashedPassWord: UserHashedPass.toHash('tnajrnejaf3r4et'),
         };
         const user = UserModel.create(args);
         newUsers.push(user);

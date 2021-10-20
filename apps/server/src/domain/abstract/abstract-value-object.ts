@@ -26,6 +26,16 @@ export abstract class AbstractValueObject<T> {
      * @param value
      */
     protected illegalLengthValue(min: number, max: number, value: string): boolean {
+        return AbstractValueObject.illegalLengthValue(min, max, value);
+    }
+
+    /**
+     * 値が範囲外の文字列長か
+     * @param min
+     * @param max
+     * @param value
+     */
+    protected static illegalLengthValue(min: number, max: number, value: string): boolean {
         return !StringUtil.between(min, max, value);
     }
 }

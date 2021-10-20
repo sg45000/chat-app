@@ -11,7 +11,7 @@ describe('UserService', () => {
                 firstName     : 'あああ',
                 lastName      : 'いいい',
                 mail          : 'samle@googlea.com',
-                hashedPassWord: 'djqe',
+                hashedPassWord: UserHashedPass.toHash('djeidjaeuf'),
             },
             EntityPId.create(),
         );
@@ -28,7 +28,7 @@ describe('UserService', () => {
         expect(foundUser).toBe(user);
 
         // パスワードが間違っていた場合
-        const wrongPassUser = await userService.identifyUser(user.mail, new UserHashedPass('12345'));
+        const wrongPassUser = await userService.identifyUser(user.mail, UserHashedPass.toHash('6723dhgw37cba'));
         expect(wrongPassUser).toBe(null);
 
         // メールアドレスが間違っていた場合

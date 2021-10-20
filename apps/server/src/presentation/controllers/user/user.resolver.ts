@@ -21,7 +21,7 @@ export class UserResolver {
                 lastName      : user.name.value.lastName,
                 firstName     : user.name.value.firstName,
                 mail          : user.mail.value,
-                hashedPassWord: user.hashedPassWord.value,
+                hashedPassWord: user.hashedPassWord,
             })
         );
     }

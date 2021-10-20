@@ -18,7 +18,7 @@ export interface UserModelArgs {
     lastName: string;
     firstName: string;
     mail: string;
-    hashedPassWord: string;
+    hashedPassWord: UserHashedPass;
 }
 
 /**
@@ -37,7 +37,7 @@ export class UserModel extends AbstractDomainModelObject<UserModelProps, UserMod
             {
                 name          : new UserName({lastName: args.lastName, firstName: args.firstName}),
                 mail          : new UserMail(args.mail),
-                hashedPassWord: new UserHashedPass(args.hashedPassWord),
+                hashedPassWord: args.hashedPassWord,
             },
             EntityPId.create()
         );
@@ -53,7 +53,7 @@ export class UserModel extends AbstractDomainModelObject<UserModelProps, UserMod
             {
                 name          : new UserName({lastName: args.lastName, firstName: args.firstName}),
                 mail          : new UserMail(args.mail),
-                hashedPassWord: new UserHashedPass(args.hashedPassWord),
+                hashedPassWord: args.hashedPassWord,
             },
             id,
         );

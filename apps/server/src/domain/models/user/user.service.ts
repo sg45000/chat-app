@@ -10,14 +10,6 @@ export class UserService {
         private readonly userRepository: IUserRepository,
     ) {
     }
-    /**
-     * 文字列をハッシュ化する
-     * @param value
-     */
-    // fixme UserHashedPassインスタンス生成時にハッシュ化した方がいい？
-    createHashedPassword(value: string): string {
-        return crypto.createHash('sha512').update(value).digest('hex');
-    }
 
     /**
      * メールアドレスが同一のユーザーが存在するか確認する

@@ -26,7 +26,7 @@ export class UserUsecase {
             lastName      : createCommand.lastName,
             firstName     : createCommand.firstName,
             mail          : createCommand.mail,
-            hashedPassWord: this.userService.createHashedPassword(createCommand.password),
+            hashedPassWord: UserHashedPass.toHash(createCommand.password),
         });
 
         const duplicated = await this.userService.existsDuplicatedUser(user.mail);
@@ -43,7 +43,7 @@ export class UserUsecase {
     async login(command: SessionCreateCommand): Promise<UserLoginOutput> {
         const user = await this.userService.identifyUser(
             new UserMail(command.mail),
-            new UserHashedPass(this.userService.createHashedPassword(command.password)),
+            UserHashedPass.toHash(command.password),
         );
 
         if(!user) {
