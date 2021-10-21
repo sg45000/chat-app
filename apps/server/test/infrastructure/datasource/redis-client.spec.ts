@@ -6,16 +6,20 @@ beforeAll(() => {
     redisClient = new RedisClientService();
 });
 
+afterAll(() => {
+    redisClient.closeConnection();
+});
+
 describe('redis data access check.',   () => {
-    test('redisにセットした値が取得した値と同じか',async () => {
+    it('redisにセットした値が取得した値と同じか',async () => {
         const key = 'abc';
         const value = '123';
-        await redisClient.set(key, value, 1);
+        await redisClient.set(key, value, 10);
         const res = await redisClient.get(key);
         expect(value).toBe(res);
     });
 
-    test('redisにセットした値が指定時間で削除されるか',async () => {
+    it('redisにセットした値が指定時間で削除されるか',async () => {
         const key = 'abc';
         const value = '123';
         await redisClient.set(key, value, 2);
