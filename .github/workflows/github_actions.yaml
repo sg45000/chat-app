@@ -1,0 +1,22 @@
+name: CI/CD
+on:
+  push:
+    branch:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup NodeJs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: Install Dependencies
+        run: yarn install
+      - name: Run Server test
+        run: yarn run server:test
