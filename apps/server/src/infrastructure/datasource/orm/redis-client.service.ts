@@ -31,4 +31,10 @@ export class RedisClientService {
         return await this.client.get(key);
     }
 
+    /**
+     * redisのコネクションを閉じる
+     */
+    closeConnection(): void {
+        this.client.disconnect();
+    }
 }
