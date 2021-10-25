@@ -1,75 +1,34 @@
 <template>
-  <v-form>
-    <v-container>
-      <v-row>
-        <v-col>
-          <v-text-field
-           v-model="mail"
-           :rules="rules.mail"
-           label="メールアドレス"
-          >
-          </v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <v-text-field
-            v-model="password"
-            :rules="rules.password"
-            :counter="16"
-            label="パスワード"
-          >
-          </v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col class="d-flex flex-row-reverse">
-          <v-btn
-            class="mr-4"
-            @click="login"
-          >
-            ログイン
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-form>
+  <login-form v-model="formValues" @send="login">
+  </login-form>
 </template>
 
 <script lang="ts">
 import CustomVue from '~/custom';
 import {gqlClientSdk} from '~/plugins/graphql/client';
+import {FormValues} from '~/types/form';
+import {LoginFormValues} from '~/components/form/LoginForm.vue';
 
 interface Data {
-  mail: string,
-  password: string,
-  rules: {
-    mail: ((v:string)=>boolean|string)[],
-    password: ((v:string)=>boolean|string)[],
-  }
+  formValues : FormValues<LoginFormValues>;
 }
 export default CustomVue.extend({
   name: 'login',
-  data(): Data {
-    return {
-      mail    : '',
-      password: '',
-      rules   : {
-        mail: [
-          (v: string) => !!v || 'メールアドレスを入れてください。'
-        ],
-        password: [
-          (v: string) => !!v || 'パスワードを入れてください。'
-        ]
-      }
-    };
-  },
+  data: (): Data => ({
+    formValues: {
+      valid : false,
+      values: {
+        mail    : '',
+        password: '',
+      },
+    }
+  }),
   methods: {
     async login() {
       const response = await gqlClientSdk.login(
         {
-          password: this.password,
-          mail    : this.mail,
+          password: this.formValues.values.password,
+          mail    : this.formValues.values.mail,
         }
       );
       console.log('response is ' + response);
