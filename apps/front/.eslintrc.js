@@ -13,6 +13,8 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    // named importを許可
+    'import/named'                                     : 'off',
     // メソッドの返り値の型指定
     '@typescript-eslint/explicit-module-boundary-types': 1,
     // 厳密等価演算子
