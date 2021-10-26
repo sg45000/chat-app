@@ -88,3 +88,6 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# to resolve vue import path
+webpack.config.js
