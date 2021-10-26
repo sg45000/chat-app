@@ -1,9 +1,9 @@
 <template>
-  <base-button
+  <BaseButton
     :disabled="disabled"
     label="ログイン"
   >
-  </base-button>
+  </BaseButton>
 </template>
 
 <script lang="ts">

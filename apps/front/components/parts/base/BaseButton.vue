@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts">
-import CustomVue from '../../../custom';
 import {PropOptions} from 'vue';
+import CustomVue from '../../../custom';
 export default CustomVue.extend ({
   props: {
     disabled: {

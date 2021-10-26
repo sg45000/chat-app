@@ -3,34 +3,35 @@
     <v-container>
       <v-row>
         <v-col>
-          <v-text-field
+          <LazyBaseInputText
             v-model="form.mail"
             :rules="rules.mail"
+            :counter="100"
             label="メールアドレス"
           >
-          </v-text-field>
+          </LazyBaseInputText>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field
+          <LazyBaseInputText
             v-model="form.password"
             :rules="rules.password"
             :counter="16"
             label="パスワード"
           >
-          </v-text-field>
+          </LazyBaseInputText>
         </v-col>
       </v-row>
       <v-row>
         <v-col class="d-flex flex-row-reverse">
-          <login-send-button
+          <LoginSendButton
             class="mr-4"
             :form="disabled"
             :disabled="!canSend"
             @click="send"
           >
-          </login-send-button>
+          </LoginSendButton>
         </v-col>
       </v-row>
     </v-container>
