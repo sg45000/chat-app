@@ -118,6 +118,11 @@ export default CustomVue.extend({
           title: 'Login',
           to   : '/login'
         },
+        {
+          icon : 'mdi-chart-bubble',
+          title: 'Signup',
+          to   : '/signup'
+        },
       ],
       miniVariant: false,
       right      : true,
