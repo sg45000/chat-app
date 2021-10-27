@@ -1,6 +1,7 @@
 <template>
   <v-btn
     :disabled="disabled"
+    @click="$emit('click', $event)"
   >
     {{label}}
     <slot />

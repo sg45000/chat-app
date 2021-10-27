@@ -2,6 +2,7 @@
   <BaseButton
     :disabled="disabled"
     label="ログイン"
+    @click="$emit('click', $event)"
   >
   </BaseButton>
 </template>

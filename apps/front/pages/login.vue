@@ -31,7 +31,7 @@ export default CustomVue.extend({
           mail    : this.formValues.values.mail,
         }
       );
-      console.log('response is ' + response);
+      console.log(response);
     }
   }
 });
