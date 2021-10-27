@@ -38,7 +38,14 @@ const nuxtConfig: NuxtConfig = {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    '~/components',
+    '~/components/form',
+    '~/components/parts',
+    '~/components/parts/base',
+    // '~/components/molecules',
+    // '~/components/organisms',
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [

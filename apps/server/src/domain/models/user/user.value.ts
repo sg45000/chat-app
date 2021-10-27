@@ -40,7 +40,7 @@ export class UserMail extends AbstractValueObject<string> {
  * ユーザーのハッシュ化されたパスワードの値オブジェクト
  */
 export class UserHashedPass extends AbstractValueObject<string> {
-    private static readonly MIN_LENGTH = 6;
+    private static readonly MIN_LENGTH = 8;
     private static readonly MAX_LENGTH = 16;
     private constructor(value: string) {
         super(value);
@@ -53,7 +53,7 @@ export class UserHashedPass extends AbstractValueObject<string> {
      */
     static toHash(rawPassWord: string): UserHashedPass {
         if(this.illegalLengthValue(this.MIN_LENGTH, this.MAX_LENGTH, rawPassWord)) {
-            throw new IllegalArgumentException(`ユーザーの名前は${this.MIN_LENGTH}文字以上、${this.MAX_LENGTH}文字以下で設定してください。`);
+            throw new IllegalArgumentException(`ユーザーのパスワードは${this.MIN_LENGTH}文字以上、${this.MAX_LENGTH}文字以下で設定してください。`);
         }
         const hash = crypto.createHash('sha512').update(rawPassWord).digest('hex');
         return new UserHashedPass(hash);

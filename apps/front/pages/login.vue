@@ -1,82 +1,37 @@
 <template>
-  <v-form>
-    <v-container>
-      <v-row>
-        <v-col>
-          <v-text-field
-           v-model="username"
-           :rules="rules.username"
-           :counter="10"
-           label="ユーザ名"
-          >
-
-          </v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <v-text-field
-            v-model="password"
-            :rules="rules.password"
-            :counter="12"
-            label="パスワード"
-          >
-          </v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col class="d-flex flex-row-reverse">
-          <v-btn
-            class="mr-4"
-            @click="login"
-          >
-            ログイン
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-form>
+  <login-form v-model="formValues" @send="login">
+  </login-form>
 </template>
 
 <script lang="ts">
 import CustomVue from '~/custom';
 import {gqlClientSdk} from '~/plugins/graphql/client';
+import {FormValues} from '~/types/form';
+import {LoginFormValues} from '~/components/form/LoginForm.vue';
 
 interface Data {
-  username: string,
-  password: string,
-  rules: {
-    username: ((v:string)=>boolean|string)[],
-    password: ((v:string)=>boolean|string)[],
-  }
+  formValues : FormValues<LoginFormValues>;
 }
 export default CustomVue.extend({
   name: 'login',
-  data(): Data {
-    return {
-      username: '',
-      password: '',
-      rules   : {
-        username: [
-          (v: string) => !!v || 'ユーザ名を入れてください。'
-        ],
-        password: [
-          (v: string) => !!v || 'パスワードを入れてください。'
-        ]
-      }
-    };
-  },
+  data: (): Data => ({
+    formValues: {
+      valid : false,
+      values: {
+        mail    : '',
+        password: '',
+      },
+    }
+  }),
   methods: {
     async login() {
-      console.log(this.username + this.password);
-      const response = await gqlClientSdk.signup(
+      const response = await gqlClientSdk.login(
         {
-          name    : this.username,
-          password: this.password,
-          mail    : 'aaaa@gmail.com'
+          password: this.formValues.values.password,
+          mail    : this.formValues.values.mail,
         }
       );
-      console.log('response is ' + response);
+      console.log(response);
     }
   }
 });

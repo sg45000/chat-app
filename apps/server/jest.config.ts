@@ -17,7 +17,7 @@ const config: Config.InitialOptions = {
         './src/infrastructure/**/*.ts',
         './src/application/**/*.ts',
     ],
-    coverageDirectory: '../coverage',
+    coverageDirectory: './coverage',
     testEnvironment  : 'node'
 };
 export default config;
