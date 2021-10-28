@@ -6,6 +6,7 @@ import {ISessionRepository} from '../../domain/models/session/session.repository
 import {IUserRepository} from '../../domain/models/user/user.repository.interface';
 import {UserModel} from '../../domain/models/user/user.model';
 import {SessionModel} from '../../domain/models/session/session.model';
+import {RequestWithUser} from '../../types/custom.types';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -21,7 +22,8 @@ export class AuthGuard implements CanActivate {
      * @param context
      */
     async canActivate(context: ExecutionContext): Promise<boolean> {
-        const req = this.getRequest(context);
+        const ctx = GqlExecutionContext.create(context);
+        const req = ctx.getContext<{req: RequestWithUser}>().req;
         try {
             const session = await this.authenticate(req);
             const user = await this.getCurrentUser(session);
@@ -46,7 +48,7 @@ export class AuthGuard implements CanActivate {
      * 認証を行う。
      * @param req
      */
-    async authenticate(req: Request): Promise<SessionModel> {
+    async authenticate(req: RequestWithUser): Promise<SessionModel> {
         // authorizationヘッダーからJWTトークンを取得する
         const authToken = req.headers.authorization;
         if (!authToken) {
