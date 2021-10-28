@@ -26,5 +26,8 @@
     "./apps/*"
   ],
   "repository": "git@github.com:sg45000/chat-app.git",
-  "author": "hamabe <hamabe@neopa.jp>"
+  "author": "hamabe <hamabe@neopa.jp>",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
 }
