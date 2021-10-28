@@ -64,7 +64,7 @@ export class UserHashedPass extends AbstractValueObject<string> {
      * @param hashedPassWord
      */
     static reconstruct(hashedPassWord: string): UserHashedPass {
-        if(hashedPassWord.length < 255) {
+        if(hashedPassWord.length < 128) {
             throw new InternalServerErrorException(
                 `${UserHashedPass.name}.${UserHashedPass.reconstruct.name}の引数に問題があります。`
             );
