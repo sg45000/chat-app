@@ -9,22 +9,25 @@
     "npm": "6.x"
   },
   "scripts": {
-    "start": "yarn workspace server start:prod",
-    "build": "yarn server:build && yarn front:build && yarn front:generate",
+    "start": "yarn server start:prod",
+    "build": "yarn server:build && yarn front:build",
     "dev": "yarn front:dev & yarn server:dev",
     "front": "yarn workspace front",
-    "front:dev": "yarn workspace front dev",
-    "front:build": "yarn front:gql && yarn workspace front build",
-    "front:gql": "yarn workspace front graphql:codegen",
-    "front:generate": "yarn front:gql && yarn workspace front generate",
-    "server:dev": "yarn workspace server start:dev",
-    "server:build": "yarn workspace server build",
+    "front:dev": "yarn front dev",
+    "front:build": "yarn front:gql && yarn front build",
+    "front:gql": "yarn front graphql:codegen",
+    "front:generate": "yarn front:gql && yarn front generate",
     "server": "yarn workspace server",
-    "server:test": "yarn workspace server test"
+    "server:dev": "yarn server start:dev",
+    "server:build": "yarn server build",
+    "server:test": "yarn server test"
   },
   "workspaces": [
     "./apps/*"
   ],
   "repository": "git@github.com:sg45000/chat-app.git",
-  "author": "hamabe <hamabe@neopa.jp>"
+  "author": "hamabe <hamabe@neopa.jp>",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
 }

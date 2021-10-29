@@ -6,9 +6,7 @@ export class RedisClientService {
     private readonly client: IORedis.Redis;
 
     constructor() {
-        this.client = new IORedis({
-            port          : 6379,
-            host          : 'localhost',
+        this.client = new IORedis(process.env.REDIS_URL,{
             commandTimeout: 3 * 1000,
         }); // fixme configServiceで置き換え
     }
