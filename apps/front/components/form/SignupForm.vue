@@ -3,28 +3,31 @@
     <v-container>
       <v-row>
         <v-col>
-          <BaseInputText
+          <LazyBaseInputText
             :counter="10"
             v-model="form.lastname"
+            @input="emitValues"
             label="姓"
           >
 
-          </BaseInputText>
+          </LazyBaseInputText>
         </v-col>
         <v-col>
-          <BaseInputText
+          <LazyBaseInputText
             :counter="10"
             v-model="form.firstname"
+            @input="emitValues"
             label="名"
           >
 
-          </BaseInputText>
+          </LazyBaseInputText>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
           <LazyBaseInputText
             v-model="form.mail"
+            @input="emitValues"
             :counter="100"
             label="メールアドレス"
           >
@@ -35,6 +38,7 @@
         <v-col>
           <LazyBaseInputText
             v-model="form.password"
+            @input="emitValues"
             :counter="16"
             label="パスワード"
           >
@@ -43,14 +47,14 @@
       </v-row>
       <v-row>
         <v-col class="d-flex flex-row-reverse">
-          <BaseButton
+          <LazyBaseButton
             class="mr-4"
             :form="disabled"
             :disabled="!canSend"
             @click="send"
             label="登録する"
           >
-          </BaseButton>
+          </LazyBaseButton>
         </v-col>
       </v-row>
     </v-container>
