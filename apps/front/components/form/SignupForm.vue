@@ -6,7 +6,6 @@
           <LazyBaseInputText
             :counter="10"
             v-model="form.lastname"
-            @input="emitValues"
             label="姓"
           >
 
@@ -16,7 +15,6 @@
           <LazyBaseInputText
             :counter="10"
             v-model="form.firstname"
-            @input="emitValues"
             label="名"
           >
 
@@ -27,7 +25,6 @@
         <v-col>
           <LazyBaseInputText
             v-model="form.mail"
-            @input="emitValues"
             :counter="100"
             label="メールアドレス"
           >
@@ -38,7 +35,6 @@
         <v-col>
           <LazyBaseInputText
             v-model="form.password"
-            @input="emitValues"
             :counter="16"
             label="パスワード"
           >
@@ -116,6 +112,15 @@ export default CustomVue.extend({
       type   : Boolean,
       default: false,
     } as PropOptions<boolean>,
+  },
+  watch: {
+    form: {
+      handler() {
+        this.emitValues();
+      },
+      deep     : true,
+      immediate: true,
+    },
   },
 });
 </script>
