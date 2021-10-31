@@ -2,8 +2,11 @@ import colors from 'vuetify/es5/util/colors';
 import {NuxtConfig} from '@nuxt/types';
 
 const PORT = process.env.PORT || 3000;
+const environment = process.env.NODE_ENV || 'development';
+const envSet = require(`./config/env.${environment}`);
 
 const nuxtConfig: NuxtConfig = {
+  env   : envSet,
   server: {
     port: PORT,
   },
@@ -62,7 +65,7 @@ const nuxtConfig: NuxtConfig = {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://localhost:3030'
+        httpEndpoint: envSet.graphqlPath,
       }
     }
   },
