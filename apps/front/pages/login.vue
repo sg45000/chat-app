@@ -25,13 +25,18 @@ export default CustomVue.extend({
   }),
   methods: {
     async login() {
-      const response = await gqlClientSdk.login(
-        {
-          password: this.formValues.values.password,
-          mail    : this.formValues.values.mail,
-        }
-      );
-      console.log(response);
+      try {
+        const response = await gqlClientSdk.login(
+          {
+            password: this.formValues.values.password,
+            mail    : this.formValues.values.mail,
+          }
+        );
+        console.log(response);
+      } catch (e) {
+        console.error(e);
+        alert(e);
+      }
     }
   }
 });

@@ -27,15 +27,20 @@ export default CustomVue.extend({
   }),
   methods: {
     async signup() {
-      const response = await gqlClientSdk.signup(
-        {
-          lastname : this.formValues.values.lastname,
-          firstname: this.formValues.values.firstname,
-          password : this.formValues.values.password,
-          mail     : this.formValues.values.mail,
-        }
-      );
-      console.log(response);
+      try {
+        const response = await gqlClientSdk.signup(
+          {
+            lastname : this.formValues.values.lastname,
+            firstname: this.formValues.values.firstname,
+            password : this.formValues.values.password,
+            mail     : this.formValues.values.mail,
+          }
+        );
+        console.log(response);
+      } catch (e) {
+        console.error(e);
+        alert(e);
+      }
     }
   }
 });
