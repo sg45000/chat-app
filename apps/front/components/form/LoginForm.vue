@@ -1,10 +1,10 @@
 <template>
-  <v-form>
+  <v-form v-model="valid">
     <v-container>
       <v-row>
         <v-col>
           <LazyBaseInputText
-            v-model="form.mail"
+            v-model="form.values.mail"
             :rules="rules.mail"
             :counter="100"
             label="メールアドレス"
@@ -15,7 +15,7 @@
       <v-row>
         <v-col>
           <LazyBaseInputText
-            v-model="form.password"
+            v-model="form.values.password"
             :rules="rules.password"
             :counter="16"
             label="パスワード"
@@ -28,7 +28,7 @@
           <LoginSendButton
             class="mr-4"
             :form="disabled"
-            :disabled="!canSend"
+            :disabled="!form.valid"
             @click="send"
           >
           </LoginSendButton>
@@ -40,14 +40,14 @@
 
 <script lang="ts">
 import {PropOptions} from 'vue';
-import CustomVue from '../../custom';
+import CustomVue from '@/custom';
 import {FormValues} from '~/types/form';
 export interface LoginFormValues {
   mail: string;
   password: string;
 }
 interface Data {
-  form : LoginFormValues,
+  form : FormValues<LoginFormValues>,
   rules: {
     mail: any,
     password: any
@@ -57,15 +57,19 @@ export default CustomVue.extend({
   name: 'LoginForm',
   data: (): Data => ({
     form: {
-      mail    : '',
-      password: '',
+      valid : false,
+      values: {
+        mail    : '',
+        password: '',
+      }
     },
     rules: {
       mail: [
         (v: string) => !!v || 'メールアドレスを入れてください。'
       ],
       password: [
-        (v: string) => !!v || 'パスワードを入れてください。'
+        (v: string) => !!v || 'パスワードを入れてください。',
+        (v: string) => v.length >= 8 || '8文字以上を設定してください。'
       ]
     },
   }),
@@ -73,12 +77,12 @@ export default CustomVue.extend({
     emitValues() {
       const formValues: FormValues<LoginFormValues> = {
         values: {
-          mail    : this.form.mail,
-          password: this.form.password,
+          mail    : this.form.values.mail,
+          password: this.form.values.password,
         },
-        valid: true,
+        valid: this.form.valid,
       };
-      this.$emit('input', formValues);
+      this.$emit('input', formValues.values);
     },
     send() {
       console.log('send');
@@ -86,9 +90,14 @@ export default CustomVue.extend({
     }
   },
   computed: {
-    canSend (): boolean {
-      return !!this.form.mail.length && !!this.form.password.length;
-    }
+    valid: {
+      get(): boolean {
+        return this.form.valid;
+      },
+      set(v: boolean): void {
+        this.form.valid = v;
+      }
+    },
   },
   props: {
     value: {
@@ -102,7 +111,7 @@ export default CustomVue.extend({
   },
   watch: {
     form: {
-      handler() {
+      handler () {
         this.emitValues();
       },
       deep     : true,
