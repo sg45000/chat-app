@@ -5,7 +5,6 @@
 
 <script lang="ts">
 import CustomVue from '~/custom';
-import {gqlClientSdk} from '~/plugins/graphql/client';
 import {FormValues} from '~/types/form';
 import {LoginFormValues} from '~/components/form/LoginForm.vue';
 
@@ -25,17 +24,12 @@ export default CustomVue.extend({
   }),
   methods: {
     async login() {
-      try {
-        const response = await gqlClientSdk.login(
-          {
-            password: this.formValues.values.password,
-            mail    : this.formValues.values.mail,
-          }
-        );
-        console.log(response);
-      } catch (e) {
-        console.error(e);
-        alert(e);
+      const response = await this.$graphql.login(
+        this.formValues.values.mail,
+        this.formValues.values.password
+      );
+      if(!response) {
+        alert('失敗しました。');
       }
     }
   }

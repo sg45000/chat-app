@@ -1,11 +1,22 @@
-import {GraphQLClient} from 'graphql-request';
-import {getSdk} from './types';
+import {Context} from '@nuxt/types';
+import {GraphqlClientBase} from './clientBase';
+import {LoginMutation} from './types';
 
-const createGraphqlClient = () => {
-  const client = new GraphQLClient('http://localhost:3030/graphql'); // fixme 可変に
-  return getSdk(client);
-};
+export class GraphqlClient extends GraphqlClientBase {
+  constructor(readonly ctx: Context) {
+    super();
+  }
 
-export type GraphqlClient = ReturnType<typeof createGraphqlClient>
-
-export const gqlClientSdk = createGraphqlClient();
+  /**
+   * ログイン
+   * @param mail
+   * @param password
+   */
+  async login(mail: string, password: string): Promise<LoginMutation['login'] | null> {
+    const result = await this.request(this.sdk.login, {mail, password});
+    if(result.isFailure()) {
+      return null;
+    }
+    return result.value.login;
+  }
+}

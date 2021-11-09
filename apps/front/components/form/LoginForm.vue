@@ -82,7 +82,7 @@ export default CustomVue.extend({
         },
         valid: this.form.valid,
       };
-      this.$emit('input', formValues.values);
+      this.$emit('input', formValues);
     },
     send() {
       console.log('send');
