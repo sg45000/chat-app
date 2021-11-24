@@ -25,7 +25,8 @@
     "graphql:codegen": "ts-node src/genGraphqlSchema.ts",
     "migrate:prisma": "dotenv -e ./env/.env.development -- npx prisma migrate dev --name",
     "prisma:studio": "dotenv -e ./env/.env.development -- npx prisma studio",
-    "prisma:gen": "dotenv -e ./env/.env.development -- npx prisma generate"
+    "prisma:gen": "dotenv -e ./env/.env.development -- npx prisma generate",
+    "docker:up": "docker compose up -d"
   },
   "dependencies": {
     "@apollo/gateway": "^0.35.1",

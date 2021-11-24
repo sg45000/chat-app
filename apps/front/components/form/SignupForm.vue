@@ -3,22 +3,22 @@
     <v-container>
       <v-row>
         <v-col>
-          <BaseInputText
+          <LazyBaseInputText
             :counter="10"
             v-model="form.lastname"
             label="姓"
           >
 
-          </BaseInputText>
+          </LazyBaseInputText>
         </v-col>
         <v-col>
-          <BaseInputText
+          <LazyBaseInputText
             :counter="10"
             v-model="form.firstname"
             label="名"
           >
 
-          </BaseInputText>
+          </LazyBaseInputText>
         </v-col>
       </v-row>
       <v-row>
@@ -43,14 +43,14 @@
       </v-row>
       <v-row>
         <v-col class="d-flex flex-row-reverse">
-          <BaseButton
+          <LazyBaseButton
             class="mr-4"
             :form="disabled"
             :disabled="!canSend"
             @click="send"
             label="登録する"
           >
-          </BaseButton>
+          </LazyBaseButton>
         </v-col>
       </v-row>
     </v-container>
@@ -112,6 +112,15 @@ export default CustomVue.extend({
       type   : Boolean,
       default: false,
     } as PropOptions<boolean>,
+  },
+  watch: {
+    form: {
+      handler() {
+        this.emitValues();
+      },
+      deep     : true,
+      immediate: true,
+    },
   },
 });
 </script>

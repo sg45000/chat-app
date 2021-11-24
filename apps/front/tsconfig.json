@@ -25,11 +25,17 @@
     },
     "types": [
       "@nuxt/types",
-      "@types/node"
+      "@types/node",
+      "./types",
+      "./node_modules/@types"
+    ],
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
     ]
   },
   "files": [
-    "shims-vue.d.ts"
+    "./types/shims-vue.d.ts"
   ],
   "include": [
     "components/**/*.ts",
