@@ -29,5 +29,8 @@
   "author": "hamabe <hamabe@neopa.jp>",
   "devDependencies": {
     "lerna": "^4.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0"
   }
 }
