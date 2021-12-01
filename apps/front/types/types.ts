@@ -4,6 +4,11 @@ export interface Post {
   isMine: boolean;
 }
 
+export interface Room {
+  id: string;
+  name: string;
+}
+
 
 export class OK<T, E> {
 

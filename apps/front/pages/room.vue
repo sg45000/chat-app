@@ -1,30 +1,42 @@
 <template>
-  <ChatContainer :posts="posts" />
+  <room-list :rooms="rooms" @enter="enterRoom($event)">
+  </room-list>
 </template>
 
 <script lang="ts">
-import {Post} from '~/types/types';
-import {PostsRepository} from '~/repositories/posts.repository';
+import {Room} from '~/types/types';
 import CustomVue from '@/custom';
-const postRepository = new PostsRepository();
-
 interface Data {
-  posts: Post[]
+  rooms: Room[]
 }
 
 export default CustomVue.extend({
   name: 'room',
   data(): Data  {
     return {
-      posts: []
+      rooms: []
     };
   },
   async created() {
-    this.posts = await this.getPosts();
+    this.rooms = await this.getRooms();
   },
   methods: {
-    async getPosts(): Promise<Post[]> {
-      return await postRepository.get();
+    getRooms(): Promise<Room[]> {
+      return new Promise((resolve)=>{
+        resolve([
+          {
+            id  : '1',
+            name: 'トークルーム1'
+          },
+          {
+            id  : '2',
+            name: 'トークルーム1'
+          },
+        ]);
+      });
+    },
+    enterRoom(room: Room) {
+      console.log(room);
     }
   }
 });
