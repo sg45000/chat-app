@@ -1,5 +1,5 @@
 export interface Post {
-  msg: string;
+  text: string;
   postAt: Date;
   isMine: boolean;
 }

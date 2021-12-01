@@ -37,6 +37,7 @@ export default CustomVue.extend({
     },
     enterRoom(room: Room) {
       console.log(room);
+      this.$router.push('chat');
     }
   }
 });
