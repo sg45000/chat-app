@@ -21,19 +21,16 @@ export default CustomVue.extend({
     this.rooms = await this.getRooms();
   },
   methods: {
-    getRooms(): Promise<Room[]> {
-      return new Promise((resolve)=>{
-        resolve([
-          {
-            id  : '1',
-            name: 'トークルーム1'
-          },
-          {
-            id  : '2',
-            name: 'トークルーム1'
-          },
-        ]);
-      });
+    async getRooms(): Promise<Room[]> {
+      const rooms = await this.$graphql.getRooms();
+      if(rooms instanceof Error) {
+        alert(rooms.message);
+        return [];
+      }
+      return rooms.map(r => ({
+        id  : r.id,
+        name: r.name,
+      }));
     },
     enterRoom(room: Room) {
       console.log(room);

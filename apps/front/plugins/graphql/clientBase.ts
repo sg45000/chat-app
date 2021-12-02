@@ -1,6 +1,7 @@
 import {GraphQLClient} from 'graphql-request';
-import {NG, OK, Result} from '../../types/types';
+import * as Dom from 'graphql-request/dist/types.dom';
 import {getSdk} from './types';
+import {NG, OK, Result} from '~/types/types';
 
 const createGraphqlClient = (client: GraphQLClient) => {
   return getSdk(client);
@@ -21,9 +22,11 @@ export abstract class GraphqlClientBase {
    * @param props
    * @protected
    */
-  protected async request<REQ,RES>(method: (req: REQ) => Promise<RES>, props: REQ): Promise<Result<RES, Error>> {
+  protected async request<REQ,RES>(method: (req: REQ, headers: Dom.RequestInit['headers']) => Promise<RES>, props: REQ): Promise<Result<RES, Error>> {
     try{
-      const result = await method(props);
+      const result = await method(props, {
+        Authorization: '' // fixme
+      });
       return new OK(result);
     } catch (e) {
       return new NG(new Error('サーバーAPI実行時エラーが発生しました。'));
