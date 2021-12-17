@@ -13,8 +13,8 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "dotenv -e ./env/.env.development nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "start:dev": "dotenv -e ./env/.env.local nest start --watch",
+    "start:debug": "dotenv -e ./env/.env.local nest start --debug --watch",
     "start:prod": "node dist/src/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
@@ -23,9 +23,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "graphql:codegen": "ts-node src/genGraphqlSchema.ts",
-    "migrate:prisma:local": "dotenv -e ./env/.env.local -- npx prisma migrate dev --name",
-    "prisma:studio:local": "dotenv -e ./env/.env.local -- npx prisma studio",
-    "prisma:gen:local": "dotenv -e ./env/.env.local -- npx prisma generate",
+    "migrate:prisma:local": "dotenv -e ./env/.env.local -- prisma migrate dev --name",
+    "prisma:studio:local": "dotenv -e ./env/.env.local -- prisma studio",
+    "prisma:gen:local": "dotenv -e ./env/.env.local -- prisma generate",
     "docker:up": "docker compose up -d"
   },
   "dependencies": {

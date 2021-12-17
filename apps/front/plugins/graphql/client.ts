@@ -3,8 +3,8 @@ import {GraphqlClientBase} from './clientBase';
 import {GetRoomsQuery, LoginMutation} from './types';
 
 export class GraphqlClient extends GraphqlClientBase {
-  constructor(readonly ctx: Context) {
-    super();
+  constructor(protected readonly ctx: Context) {
+    super(ctx);
   }
 
   /**
