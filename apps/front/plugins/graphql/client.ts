@@ -1,6 +1,6 @@
 import {Context} from '@nuxt/types';
 import {GraphqlClientBase} from './clientBase';
-import {GetRoomsQuery, LoginMutation} from './types';
+import {GetRoomsQuery, LoginMutation, SignupMutation} from './types';
 
 export class GraphqlClient extends GraphqlClientBase {
   constructor(protected readonly ctx: Context) {
@@ -18,6 +18,21 @@ export class GraphqlClient extends GraphqlClientBase {
       return null;
     }
     return result.value.login;
+  }
+
+  /**
+   * ユーザー登録
+   * @param firstname
+   * @param lastname
+   * @param mail
+   * @param password
+   */
+  async signup(firstname: string, lastname: string, mail: string, password: string): Promise<SignupMutation['signup'] | null> {
+    const result = await this.request(this.sdk.signup, {firstname, lastname, mail, password});
+    if(result.isFailure()) {
+      return null;
+    }
+    return result.value.signup;
   }
 
   /**

@@ -26,14 +26,14 @@ export class UserResolver {
         );
     }
 
-    @Mutation(returns => UserResponse)
-    async signup(@Args('params') params: SignupUserRequest): Promise<UserResponse> {
-        const user = await this.userAppService.signUpUser(params);
-        return new UserResponse(user);
+    @Mutation(returns => OwnUserResponse)
+    async signup(@Args('params') params: SignupUserRequest): Promise<OwnUserResponse> {
+        const loginOutput = await this.userAppService.signUpUser(params);
+        return new OwnUserResponse(loginOutput.user, loginOutput.session);
     }
 
     @Mutation(returns => OwnUserResponse)
-    async login(@Args('params') params: LoginUserRequest): Promise<UserResponse> {
+    async login(@Args('params') params: LoginUserRequest): Promise<OwnUserResponse> {
         const loginOutput = await this.userAppService.login(params);
         return new OwnUserResponse(loginOutput.user, loginOutput.session);
     }
