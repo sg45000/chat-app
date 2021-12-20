@@ -1,10 +1,8 @@
 <template>
   <v-container class="roomList">
-    <v-row v-for="room in rooms" :key="room.id" @click="enterRoom(room)">
-      <v-col>
-        ルーム名 {{room.name}}
-      </v-col>
-    </v-row>
+    <LazyHoverCard v-for="room in rooms" :key="room.id" @click="enterRoom(room)">
+      {{room.name}}
+    </LazyHoverCard>
   </v-container>
 </template>
 
