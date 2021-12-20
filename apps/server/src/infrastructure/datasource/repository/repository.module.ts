@@ -1,4 +1,4 @@
-import {Module, Provider} from '@nestjs/common';
+import {Module, Provider, Type} from '@nestjs/common';
 import {UserRepository, UserRepositoryMock} from './user.repository';
 import {IUserRepository} from '../../../domain/models/user/user.repository.interface';
 import {OrmModule} from '../orm/orm.module';
@@ -11,14 +11,14 @@ const providers: Provider[] = [
     {
         provide : IUserRepository,
         useClass:
-            process.env.NODE_ENV === 'testing'
+            isMocking()
                 ? UserRepositoryMock
                 : UserRepository,
     },
     {
         provide : ISessionRepository,
         useClass:
-            process.env.NODE_ENV === 'testing'
+            isMocking()
                 ? SessionRepositoryMock
                 : SessionRepository,
     },
@@ -30,7 +30,15 @@ const providers: Provider[] = [
 @Module({
     controllers: [],
     providers  : [...providers],
-    imports    : [OrmModule],
+    imports    : resolveImports(),
     exports    : [IUserRepository, ISessionRepository, IRoomRepository]
 })
 export class RepositoryModule {}
+
+function resolveImports(): Type[] {
+    return isMocking() ? [] : [OrmModule];
+}
+
+function isMocking(): boolean {
+    return process.env.USE_MOCK === 'true';
+}

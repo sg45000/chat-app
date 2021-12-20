@@ -19,6 +19,7 @@
     "front:generate": "yarn front:gql && yarn front generate",
     "server": "yarn workspace server",
     "server:dev": "yarn server start:dev",
+    "server:dev:mock": "yarn server start:dev:mock",
     "server:build": "yarn server build",
     "server:test": "yarn server test"
   },

@@ -32,7 +32,11 @@ export class MockRoomRepository extends IRoomRepository {
      */
     findAll(): Promise<RoomModel[]> {
         return new Promise<RoomModel[]>((resolve)=>{
-            resolve([RoomModel.create({name: 'トークルーム1'})]);
+            resolve([
+                RoomModel.create({name: 'トークルーム1'}),
+                RoomModel.create({name: 'トークルーム2'}),
+                RoomModel.create({name: 'トークルーム3'}),
+            ]);
         });
     }
 }
