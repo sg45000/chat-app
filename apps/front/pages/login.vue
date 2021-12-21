@@ -30,7 +30,9 @@ export default CustomVue.extend({
       );
       if(!response) {
         alert('失敗しました。');
+        return;
       }
+      this.$accessor.auth.updateToken(response.sessionId);
     }
   }
 });

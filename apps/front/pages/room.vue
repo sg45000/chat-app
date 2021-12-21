@@ -1,30 +1,40 @@
 <template>
-  <ChatContainer :posts="posts" />
+  <room-list :rooms="rooms" @enter="enterRoom($event)">
+  </room-list>
 </template>
 
 <script lang="ts">
-import {Post} from '~/types/types';
-import {PostsRepository} from '~/repositories/posts.repository';
+import {Room} from '~/types/types';
 import CustomVue from '@/custom';
-const postRepository = new PostsRepository();
-
 interface Data {
-  posts: Post[]
+  rooms: Room[]
 }
 
 export default CustomVue.extend({
   name: 'room',
   data(): Data  {
     return {
-      posts: []
+      rooms: []
     };
   },
   async created() {
-    this.posts = await this.getPosts();
+    this.rooms = await this.getRooms();
   },
   methods: {
-    async getPosts(): Promise<Post[]> {
-      return await postRepository.get();
+    async getRooms(): Promise<Room[]> {
+      const rooms = await this.$graphql.getRooms();
+      if(rooms instanceof Error) {
+        alert(rooms.message);
+        return [];
+      }
+      return rooms.map(r => ({
+        id  : r.id,
+        name: r.name,
+      }));
+    },
+    enterRoom(room: Room) {
+      console.log(room);
+      this.$router.push('chat');
     }
   }
 });

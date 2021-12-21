@@ -9,7 +9,7 @@
 <!--        <img src="" alt="">-->
       </v-avatar>
       <v-col>
-        <MessageBox :message="post.msg"/>
+        <MessageBox :message="post.text"/>
       </v-col>
       <v-spacer v-if="!post.isMine"></v-spacer>
     </v-row>
@@ -27,8 +27,6 @@
 <script lang="ts">
 import MessageBox from './MessageBox.vue';
 import CustomVue from '~/custom';
-import {PostsRepository} from '~/repositories/posts.repository';
-const postRepository = new PostsRepository();
 
 export default  CustomVue.extend({
   name      : 'ChatContainer',
@@ -42,11 +40,6 @@ export default  CustomVue.extend({
   },
   methods: {
     async send() {
-      await postRepository.post({
-        msg   : this.message,
-        postAt: new Date(),
-        isMine: true,
-      });
       this.reset();
     },
     reset() {

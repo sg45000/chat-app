@@ -25,6 +25,11 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
+    env:
+      DATABASE_URL: postgresql://user:pass@localhost:5432/mydb
+      REDIS_URL: redis://localhost:6379
+      NODE_ENV: development
+      USE_MOCK: false
     steps:
       - uses: actions/checkout@v1
       - name: Setup NodeJs
@@ -33,5 +38,7 @@ jobs:
           node-version: '14.x'
       - name: Install Dependencies
         run: yarn install
+      - name: sync DB
+        run: yarn run db:sync
       - name: Run Server test
         run: yarn run server:test

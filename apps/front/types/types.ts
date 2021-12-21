@@ -1,7 +1,12 @@
 export interface Post {
-  msg: string;
+  text: string;
   postAt: Date;
   isMine: boolean;
+}
+
+export interface Room {
+  id: string;
+  name: string;
 }
 
 

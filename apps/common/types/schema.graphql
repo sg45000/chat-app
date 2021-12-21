@@ -32,7 +32,7 @@ type Query {
 }
 
 type Mutation {
-  signup(params: SignupUserRequest!): UserResponse!
+  signup(params: SignupUserRequest!): OwnUserResponse!
   login(params: LoginUserRequest!): OwnUserResponse!
 }
 

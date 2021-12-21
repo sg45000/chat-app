@@ -9,7 +9,7 @@ const config: Config.InitialOptions = {
     rootDir  : '.',
     testRegex: '.*\\.spec\\.ts$',
     transform: {
-        '^.+\\.(t|j)s$': 'ts-jest'
+        '^.+\\.ts$': 'ts-jest'
     },
     collectCoverage    : true,
     collectCoverageFrom: [
@@ -17,6 +17,7 @@ const config: Config.InitialOptions = {
         './src/infrastructure/**/*.ts',
         './src/application/**/*.ts',
     ],
+    setupFiles       : ['<rootDir>/test/setupTest.ts'],
     coverageDirectory: './coverage',
     testEnvironment  : 'node'
 };

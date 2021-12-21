@@ -40,10 +40,11 @@ const nuxtConfig: NuxtConfig = {
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
-    '~/components',
+    '~/components/',
     '~/components/form',
     '~/components/parts',
     '~/components/parts/base',
+    '~/components/list',
     // '~/components/molecules',
     // '~/components/organisms',
   ],
@@ -54,6 +55,7 @@ const nuxtConfig: NuxtConfig = {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    'nuxt-typed-vuex',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -88,6 +90,9 @@ const nuxtConfig: NuxtConfig = {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: [
+      /typed-vuex/,
+    ],
   }
 };
 

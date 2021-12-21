@@ -3,6 +3,7 @@ import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {ControllerModule} from './presentation/controllers/controller.module';
 import {AuthModule} from './presentation/authentication/auth.module';
+import {LoggingPlugin} from './plugins/logging.plugin';
 
 @Module({
     imports: [
@@ -10,6 +11,6 @@ import {AuthModule} from './presentation/authentication/auth.module';
         AuthModule,
     ],
     controllers: [AppController],
-    providers  : [AppService],
+    providers  : [AppService, LoggingPlugin],
 })
 export class AppModule {}

@@ -91,3 +91,6 @@ sw.*
 
 # to resolve vue import path
 webpack.config.js
+
+# ignore dump
+dump.rdb

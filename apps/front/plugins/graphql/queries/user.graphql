@@ -5,8 +5,9 @@ mutation signup($lastname: String!,$firstname: String!, $mail: String!, $passwor
     mail: $mail,
     password: $password,
   }){
-    name,
-    mail,
+    name
+    mail
+    sessionId
   }
 }
 

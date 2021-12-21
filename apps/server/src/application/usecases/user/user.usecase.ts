@@ -21,7 +21,7 @@ export class UserUsecase {
      * ユーザーの登録を行う。
      * @param createCommand
      */
-    async signUpUser(createCommand: UserCreateCommand): Promise<UserModel> {
+    async signUpUser(createCommand: UserCreateCommand): Promise<UserLoginOutput> {
         const user = UserModel.create({
             lastName      : createCommand.lastName,
             firstName     : createCommand.firstName,
@@ -33,8 +33,11 @@ export class UserUsecase {
         if(duplicated) {
             throw new BadRequestException('指定のメールアドレスは既に登録されています。');
         }
+        await this.userRepository.create(user);
+        const session = SessionModel.create(user);
+        await this.sessionRepository.create(session);
 
-        return await this.userRepository.create(user);
+        return new UserLoginOutput(session, user);
     }
 
     /**

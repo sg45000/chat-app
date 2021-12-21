@@ -35,6 +35,21 @@ export class RoomModel extends AbstractDomainModelObject<RoomModelProps, RoomMod
     }
 
     /**
+     * 再構築用のファクトリメソッド
+     * @param args
+     * @param id
+     */
+    static reconstruct(args: RoomModelArgs, id: EntityPId<RoomModel>): RoomModel {
+        return new RoomModel(
+            {
+                name   : new RoomName(args.name),
+                members: [],
+            },
+            id,
+        );
+    }
+
+    /**
      * メンバーをトークルームに追加する
      * @param user
      */
