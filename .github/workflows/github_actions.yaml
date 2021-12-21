@@ -39,6 +39,6 @@ jobs:
       - name: Install Dependencies
         run: yarn install
       - name: sync DB
-        run: prisma db push --preview-feature
+        run: yarn run db:sync
       - name: Run Server test
         run: yarn run server:test

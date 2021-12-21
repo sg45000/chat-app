@@ -27,6 +27,7 @@
     "migrate:prisma:local": "dotenv -e ./env/.env.local -- prisma migrate dev --name",
     "prisma:studio:local": "dotenv -e ./env/.env.local -- prisma studio",
     "prisma:gen:local": "dotenv -e ./env/.env.local -- prisma generate",
+    "prisma:sync": "prisma db push --preview-feature",
     "docker:up": "docker compose up -d"
   },
   "dependencies": {
