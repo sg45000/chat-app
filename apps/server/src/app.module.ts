@@ -1,6 +1,4 @@
 import {Module} from '@nestjs/common';
-import {AppController} from './app.controller';
-import {AppService} from './app.service';
 import {ControllerModule} from './presentation/controllers/controller.module';
 import {AuthModule} from './presentation/authentication/auth.module';
 import {LoggingPlugin} from './plugins/logging.plugin';
@@ -10,7 +8,7 @@ import {LoggingPlugin} from './plugins/logging.plugin';
         ControllerModule,
         AuthModule,
     ],
-    controllers: [AppController],
-    providers  : [AppService, LoggingPlugin],
+    controllers: [],
+    providers  : [LoggingPlugin],
 })
 export class AppModule {}
