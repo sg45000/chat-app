@@ -34,4 +34,9 @@ jobs:
       - name: Install Dependencies
         run: yarn install
       - name: Run Server test
+        env:
+          DATABASE_URL: postgresql://user:pass@localhost:5432/mydb
+          REDIS_URL: redis://localhost:6379
+          NODE_ENV: development
+          USE_MOCK: false
         run: yarn run server:test
