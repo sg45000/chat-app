@@ -74,8 +74,23 @@ export class UserRepository implements IUserRepository {
 
 @Injectable()
 export class UserRepositoryMock implements IUserRepository {
+    inMemoryRecords: UserModel[] = [];
+    constructor() {
+        this.inMemoryRecords.push(
+            UserModel.reconstruct(
+                {
+                    firstName     : 'あああ',
+                    lastName      : 'いいい',
+                    mail          : 'sample@googlea.com',
+                    hashedPassWord: UserHashedPass.toHash('123456789'),
+                },
+                EntityPId.create(),
+            ),
+        );
+    }
     async create(user: UserModel): Promise<UserModel> {
         return new Promise((resolve) => {
+            this.inMemoryRecords.push(user);
             resolve(user);
         });
     }
@@ -83,15 +98,7 @@ export class UserRepositoryMock implements IUserRepository {
     async findOneById(id: EntityPId<UserModel>): Promise<UserModel | null> {
         return new Promise((resolve) => {
             resolve(
-                UserModel.reconstruct(
-                    {
-                        firstName     : 'あああ',
-                        lastName      : 'いいい',
-                        mail          : 'sample@googlea.com',
-                        hashedPassWord: UserHashedPass.toHash('123456789'),
-                    },
-                    EntityPId.create(),
-                ),
+                this.inMemoryRecords[0]
             );
         });
     }

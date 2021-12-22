@@ -37,7 +37,7 @@ const providers: Provider[] = [
     controllers: [],
     providers  : [...providers],
     imports    : resolveImports(),
-    exports    : [IUserRepository, ISessionRepository, IRoomRepository]
+    exports    : [IUserRepository, ISessionRepository, IRoomRepository, IPostRepository]
 })
 export class RepositoryModule {}
 

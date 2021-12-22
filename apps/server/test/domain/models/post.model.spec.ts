@@ -1,16 +1,24 @@
 import {PostModel} from '../../../src/domain/models/post/post.model';
+import {EntityPId} from '../../../src/domain/models/common.value';
 
 describe('PostModelTest', ()=>{
     const posts: PostModel[] = [];
     beforeAll(() => {
         const post1 = PostModel.create({
-            message: 'おはよう！',
-            replyTo: null,
+            message  : 'おはよう！',
+            room     : EntityPId.create(),
+            owner    : EntityPId.create(),
+            replyTo  : null,
+            createdAt: new Date(),
         });
 
         const post2 = PostModel.create({
-            message: 'こんにちは！',
-            replyTo: null,
+            message  : 'こんにちは！',
+            room     : EntityPId.create(),
+            owner    : EntityPId.create(),
+            replyTo  : null,
+            createdAt: new Date(),
+
         });
 
         posts.push(post1, post2);
@@ -21,8 +29,12 @@ describe('PostModelTest', ()=>{
 
         const post1Reconstruct = PostModel.reconstruct(
             {
-                message: 'おはよう！',
-                replyTo: null,
+                message  : 'おはよう！',
+                room     : EntityPId.create(),
+                owner    : EntityPId.create(),
+                replyTo  : null,
+                createdAt: new Date(),
+
             },
             post1.id
         );
@@ -33,8 +45,12 @@ describe('PostModelTest', ()=>{
         const post1 = posts[0];
 
         const post3 = PostModel.create({
-            message: 'おはよう！',
-            replyTo: null,
+            message  : 'おはよう！',
+            room     : EntityPId.create(),
+            owner    : EntityPId.create(),
+            replyTo  : null,
+            createdAt: new Date(),
+
         });
         expect(post1.equals(post3)).toBeFalsy();
     });

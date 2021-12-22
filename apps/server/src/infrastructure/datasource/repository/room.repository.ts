@@ -27,16 +27,22 @@ export class RoomRepository extends IRoomRepository {
 
 @Injectable()
 export class MockRoomRepository extends IRoomRepository {
+    inMemoryRecords: RoomModel[] = [];
+    constructor() {
+        super();
+        this.inMemoryRecords.push(
+            RoomModel.create({name: 'トークルーム1'}),
+            RoomModel.create({name: 'トークルーム2'}),
+            RoomModel.create({name: 'トークルーム3'}),
+            
+        );
+    }
     /**
      * トークルームを全て取得する
      */
     findAll(): Promise<RoomModel[]> {
         return new Promise<RoomModel[]>((resolve)=>{
-            resolve([
-                RoomModel.create({name: 'トークルーム1'}),
-                RoomModel.create({name: 'トークルーム2'}),
-                RoomModel.create({name: 'トークルーム3'}),
-            ]);
+            resolve(this.inMemoryRecords);
         });
     }
 }

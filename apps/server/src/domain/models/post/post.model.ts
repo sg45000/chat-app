@@ -1,14 +1,21 @@
 import {EntityPId} from '../common.value';
 import {PostMessage} from './post.value';
 import {AbstractDomainModelObject} from '../../abstract/abstract-domain-model-object';
+import {RoomModel} from '../room/room.model';
+import {UserModel} from '../user/user.model';
 
 export interface PostModelArgs {
     message: string;
+    room: EntityPId<RoomModel>;
+    owner: EntityPId<UserModel>;
     replyTo: EntityPId<PostModel> | null;
+    createdAt: Date;
 }
 export interface PostModelProps {
     message: PostMessage;
     replyTo: EntityPId<PostModel> | null;
+    room: EntityPId<RoomModel>;
+    owner: EntityPId<UserModel>;
     createdAt: Date;
 }
 
@@ -22,6 +29,8 @@ export class PostModel extends AbstractDomainModelObject<PostModelProps, PostMod
             {
                 message  : new PostMessage(args.message),
                 replyTo  : args.replyTo,
+                room     : args.room,
+                owner    : args.owner,
                 createdAt: new Date(),
             },
             EntityPId.create()
@@ -38,7 +47,9 @@ export class PostModel extends AbstractDomainModelObject<PostModelProps, PostMod
             {
                 message  : new PostMessage(args.message),
                 replyTo  : args.replyTo,
-                createdAt: new Date(),
+                room     : args.room,
+                owner    : args.owner,
+                createdAt: args.createdAt,
             },
             id
         );
