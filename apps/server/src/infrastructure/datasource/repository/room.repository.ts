@@ -26,7 +26,7 @@ export class RoomRepository extends IRoomRepository {
 }
 
 @Injectable()
-export class MockRoomRepository extends IRoomRepository {
+export class RoomRepositoryMock extends IRoomRepository {
     inMemoryRecords: RoomModel[] = [];
     constructor() {
         super();

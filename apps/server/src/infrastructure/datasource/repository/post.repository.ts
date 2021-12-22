@@ -1,17 +1,17 @@
 import {IPostRepository} from '../../../domain/models/post/post.repository.interface';
 import {PostModel} from '../../../domain/models/post/post.model';
 import {Injectable, Inject} from '@nestjs/common';
-import {MockRoomRepository} from './room.repository';
+import {RoomRepositoryMock} from './room.repository';
 import {UserRepositoryMock} from './user.repository';
 import {IRoomRepository} from '../../../domain/models/room/room.repository.interface';
 import {IUserRepository} from '../../../domain/models/user/user.repository.interface';
 
 @Injectable()
-export class MockPostRepository extends IPostRepository {
+export class PostRepositoryMock extends IPostRepository {
     inMemoryRecords: PostModel[] = [];
 
     constructor(
-        @Inject(IRoomRepository) private readonly roomRepository: MockRoomRepository,
+        @Inject(IRoomRepository) private readonly roomRepository: RoomRepositoryMock,
         @Inject(IUserRepository) private readonly userRepository: UserRepositoryMock,
     ) {
         super();
