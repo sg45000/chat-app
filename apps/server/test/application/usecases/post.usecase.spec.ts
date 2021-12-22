@@ -36,7 +36,7 @@ describe('postUsecaseTest', () => {
     it('getPostsLatest100', async () => {
         const returnValue = [postRepository.inMemoryRecords[0]];
         jest.spyOn(postRepository, 'find').mockReturnValueOnce(Promise.resolve(returnValue));
-        expect(postRepository.find).toHaveBeenCalled();
         expect(await postUsecase.getPostsLatest100()).toEqual(returnValue);
+        expect(postRepository.find).toHaveBeenCalled();
     });
 });
