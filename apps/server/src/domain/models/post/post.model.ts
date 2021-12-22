@@ -54,4 +54,25 @@ export class PostModel extends AbstractDomainModelObject<PostModelProps, PostMod
             id
         );
     }
+
+    /**
+     * メッセージプロパティ
+     */
+    get message(): PostMessage {
+        return this.props.message;
+    }
+
+    /**
+     * 投稿の所有者
+     */
+    get owner(): EntityPId<UserModel> {
+        return this.props.owner;
+    }
+
+    /**
+     * 返信先投稿
+     */
+    get replyTo(): EntityPId<PostModel> | null {
+        return this.props.replyTo;
+    }
 }
