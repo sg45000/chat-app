@@ -18,7 +18,8 @@ async function bootstrap() {
     app.useStaticAssets(staticFilesPath);
 
     app.useGlobalPipes(new ValidationPipe({}));
-    await app.listen(process.env.PORT || 3030);
-    console.log('start');
+    const port = process.env.PORT || 3030;
+    await app.listen(port);
+    console.log(`server listen: port ${port}`);
 }
 void bootstrap();
