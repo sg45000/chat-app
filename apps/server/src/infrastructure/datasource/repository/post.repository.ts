@@ -27,7 +27,7 @@ export class PostRepositoryMock extends IPostRepository {
      * 投稿を取得する
      * @param limit 取得最大件数
      */
-    async find(limit = 100): Promise<PostModel[]> {
+    find = async (limit = 100): Promise<PostModel[]> => {
         return new Promise<PostModel[]>((resolve) => {
             const length = this.inMemoryRecords.length;
             const overLength = limit - length < 0 ? Math.abs(limit - length) : 0;
@@ -40,7 +40,7 @@ export class PostRepositoryMock extends IPostRepository {
      * 1件投稿を追加する
      * @param post
      */
-    async add(post: PostModel): Promise<PostModel> {
+    add = async (post: PostModel): Promise<PostModel> => {
         return new Promise<PostModel>((resolve) => {
             this.inMemoryRecords.push(post);
             resolve(post);
