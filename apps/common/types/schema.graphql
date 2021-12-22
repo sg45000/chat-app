@@ -26,9 +26,19 @@ type RoomResponse {
   name: String!
 }
 
+type PostResponse {
+  id: String!
+  message: String!
+  ownerId: String!
+  replyTo: String
+}
+
 type Query {
   ownUser: UserResponse!
   rooms: [RoomResponse!]!
+
+  """投稿の最新100件を取得する"""
+  getPosts: [PostResponse!]!
 }
 
 type Mutation {
