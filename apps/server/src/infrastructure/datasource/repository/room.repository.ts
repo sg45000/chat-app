@@ -23,6 +23,15 @@ export class RoomRepository extends IRoomRepository {
             EntityPId.reconstruct(r.id)
         ));
     }
+
+    /**
+     * IDをキーに1件取得する
+     * @param id
+     */
+    findOneById = async(id: EntityPId<RoomModel>): Promise<RoomModel> => {
+        // fixme
+        throw Error();
+    }
 }
 
 @Injectable()
@@ -43,6 +52,16 @@ export class RoomRepositoryMock extends IRoomRepository {
     findAll(): Promise<RoomModel[]> {
         return new Promise<RoomModel[]>((resolve)=>{
             resolve(this.inMemoryRecords);
+        });
+    }
+
+    /**
+     * IDをキーに1件取得する
+     * @param id
+     */
+    findOneById = async(id: EntityPId<RoomModel>): Promise<RoomModel | null> => {
+        return new Promise<RoomModel | null>((resolve) =>{
+            resolve(this.inMemoryRecords.find(r => r.id.equals(id)) || null);
         });
     }
 }

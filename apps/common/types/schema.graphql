@@ -44,6 +44,9 @@ type Query {
 type Mutation {
   signup(params: SignupUserRequest!): OwnUserResponse!
   login(params: LoginUserRequest!): OwnUserResponse!
+
+  """投稿を一件追加する"""
+  addPost(params: AddPostRequest!): PostResponse!
 }
 
 input SignupUserRequest {
@@ -56,4 +59,10 @@ input SignupUserRequest {
 input LoginUserRequest {
   mail: String!
   password: String!
+}
+
+input AddPostRequest {
+  message: String!
+  replyTo: String
+  roomId: String!
 }

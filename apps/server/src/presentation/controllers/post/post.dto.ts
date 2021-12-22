@@ -1,4 +1,4 @@
-import {Field, ObjectType} from '@nestjs/graphql';
+import {Field, ObjectType, InputType} from '@nestjs/graphql';
 import {PostModel} from '../../../domain/models/post/post.model';
 
 @ObjectType()
@@ -20,4 +20,16 @@ export class PostResponse {
 
     @Field(type => String, {nullable: true})
     readonly replyTo: string | null;
+}
+
+@InputType()
+export class AddPostRequest {
+    @Field()
+    readonly message: string;
+
+    @Field(type => String, {nullable: true})
+    readonly replyTo: string | null;
+
+    @Field()
+    readonly roomId: string;
 }

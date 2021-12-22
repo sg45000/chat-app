@@ -10,7 +10,9 @@ import {IRoomRepository} from '../../../src/domain/models/room/room.repository.i
 describe('postUsecaseTest', () => {
     let postUsecase: PostUsecase;
     let postRepository: PostRepositoryMock;
-    beforeAll(async () => {
+    let userRepository: UserRepositoryMock;
+    let roomRepository: RoomRepositoryMock;
+    beforeEach(async () => {
         const moduleRef = await Test.createTestingModule({
             providers: [
                 PostUsecase,
@@ -31,6 +33,8 @@ describe('postUsecaseTest', () => {
 
         postUsecase = moduleRef.get<PostUsecase>(PostUsecase);
         postRepository = moduleRef.get(IPostRepository);
+        userRepository = moduleRef.get(IUserRepository);
+        roomRepository = moduleRef.get(IRoomRepository);
     });
 
     it('getPostsLatest100', async () => {
@@ -38,5 +42,17 @@ describe('postUsecaseTest', () => {
         jest.spyOn(postRepository, 'find').mockReturnValueOnce(Promise.resolve(returnValue));
         expect(await postUsecase.getPostsLatest100()).toEqual(returnValue);
         expect(postRepository.find).toHaveBeenCalled();
+    });
+
+    it('addPost', async () => {
+        const returnValue = postRepository.inMemoryRecords[0];
+        jest.spyOn(postRepository, 'add').mockReturnValueOnce(Promise.resolve(returnValue));
+        expect(await postUsecase.addPost({
+            message: 'おはよう！',
+            room   : roomRepository.inMemoryRecords[0],
+            owner  : userRepository.inMemoryRecords[0],
+            replyTo: null,
+        })).toEqual(returnValue);
+        expect(postRepository.add).toHaveBeenCalled();
     });
 });
