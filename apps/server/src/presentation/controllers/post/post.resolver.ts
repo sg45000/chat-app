@@ -1,14 +1,14 @@
-import {Query, Args, Subscription} from '@nestjs/graphql';
+import {Query, Args, Mutation, Resolver} from '@nestjs/graphql';
 import {Inject} from '@nestjs/common';
-import {PubSub} from 'apollo-server-express';
 import {PostModel} from '../../../domain/models/post/post.model';
 import {PostResponse} from './post.dto';
 import {PostUsecase} from '../../../application/usecases/post/post.usecase';
 
+@Resolver(PostResponse)
 export class PostResolver {
     constructor(
         private readonly postUsecase: PostUsecase,
-        @Inject('PUB_SUB') private readonly pubSub: PubSub,
+        // @Inject('PUB_SUB') private readonly pubSub: PubSub,
     ) {
     }
 
@@ -24,7 +24,7 @@ export class PostResolver {
     //     await this.pubSub.publish('bookAdded', newBook);
     //     return newBook;
     // }
-    //
+
     // @Subscription(returns => PostModel)
     // async postAdded() {
     //     return this.pubSub.asyncIterator('postAdded');
