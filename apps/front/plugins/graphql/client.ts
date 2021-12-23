@@ -1,6 +1,11 @@
 import {Context} from '@nuxt/types';
 import {GraphqlClientBase} from './clientBase';
-import {GetPostsQuery, GetRoomsQuery, LoginMutation, SignupMutation} from './types';
+import {
+  GetPostsQueryResponse,
+  GetRoomsQueryResponse,
+  LoginMutationResponse,
+  SignupMutationResponse
+} from '~/plugins/graphql/response.types';
 
 export class GraphqlClient extends GraphqlClientBase {
   constructor(protected readonly ctx: Context) {
@@ -12,7 +17,7 @@ export class GraphqlClient extends GraphqlClientBase {
    * @param mail
    * @param password
    */
-  async login(mail: string, password: string): Promise<LoginMutation['login'] | null> {
+  async login(mail: string, password: string): Promise<LoginMutationResponse | null> {
     const result = await this.request(this.sdk.login, {mail, password});
     if(result.isFailure()) {
       return null;
@@ -27,7 +32,7 @@ export class GraphqlClient extends GraphqlClientBase {
    * @param mail
    * @param password
    */
-  async signup(firstname: string, lastname: string, mail: string, password: string): Promise<SignupMutation['signup'] | null> {
+  async signup(firstname: string, lastname: string, mail: string, password: string): Promise<SignupMutationResponse | null> {
     const result = await this.request(this.sdk.signup, {firstname, lastname, mail, password});
     if(result.isFailure()) {
       return null;
@@ -38,7 +43,7 @@ export class GraphqlClient extends GraphqlClientBase {
   /**
    * 全トークルーム取得
    */
-  async getRooms(): Promise<GetRoomsQuery['rooms'] | Error> {
+  async getRooms(): Promise<GetRoomsQueryResponse | Error> {
     const result = await this.request(this.sdk.getRooms, undefined);
     if(result.isFailure()) {
       return new Error('トークルームデータが取得できませんでした。');
@@ -49,7 +54,7 @@ export class GraphqlClient extends GraphqlClientBase {
   /**
    * 最新の投稿を複数件取得
    */
-  async getPosts(): Promise<GetPostsQuery['posts'] | Error> {
+  async getPosts(): Promise<GetPostsQueryResponse | Error> {
     const result = await this.request(this.sdk.getPosts, undefined);
     if(result.isFailure()) {
       return new Error('投稿データが取得できませんでした。');
