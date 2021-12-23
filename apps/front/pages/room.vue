@@ -4,8 +4,8 @@
 </template>
 
 <script lang="ts">
-import {Room} from '~/types/types';
 import CustomVue from '@/custom';
+import {Room} from '~/models/room.model';
 interface Data {
   rooms: Room[]
 }
@@ -27,14 +27,11 @@ export default CustomVue.extend({
         alert(rooms.message);
         return [];
       }
-      return rooms.map(r => ({
-        id  : r.id,
-        name: r.name,
-      }));
+      return rooms.map(r => new Room(r.id, r.name, this.$accessor.auth.userId));
     },
     enterRoom(room: Room) {
       console.log(room);
-      this.$router.push('chat');
+      this.$router.push({name: 'chat', params: {id: room.id, name: room.name, userId: room.userId} });
     }
   }
 });

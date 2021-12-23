@@ -3,8 +3,10 @@
 </template>
 
 <script lang="ts">
-import {Post} from 'types/types';
+import {PropOptions} from 'vue';
 import CustomVue from '@/custom';
+import {Room} from '~/models/room.model';
+import {Post} from '~/models/post.model';
 interface Data {
   posts: Post[]
 }
@@ -13,30 +15,23 @@ export default CustomVue.extend({
   data: (): Data => ({
     posts: [],
   }),
+  props: {
+    room: {
+      type    : Object,
+      required: true,
+    } as PropOptions<Room>,
+  },
   async created() {
     this.posts = await this.getPosts();
   },
   methods: {
-    getPosts(): Promise<Post[]> {
-      return new Promise((resolve) => {
-        resolve([
-          {
-            text  : 'おはようございます',
-            postAt: new Date(),
-            isMine: true,
-          },
-          {
-            text  : 'こんにちは',
-            postAt: new Date(),
-            isMine: true,
-          },
-          {
-            text  : 'さよなら',
-            postAt: new Date(),
-            isMine: false,
-          }
-        ]);
-      });
+    async getPosts(): Promise<Post[]> {
+      const response = await this.$graphql.getPosts();
+      if(response instanceof Error) {
+        alert(response.message);
+        return [];
+      }
+      return response.map(r => new Post(r.id, r.message, r.ownerId, new Date()));
     }
   }
 });

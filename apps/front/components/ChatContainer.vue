@@ -4,14 +4,14 @@
     v-for="(post, i) in posts"
     :key="i"
     >
-      <v-spacer v-if="post.isMine"></v-spacer>
-      <v-avatar v-if="!post.isMine" color="primary" size="50">
+      <v-spacer v-if="isMine(post)"></v-spacer>
+      <v-avatar v-if="!isMine(post)" color="primary" size="50">
 <!--        <img src="" alt="">-->
       </v-avatar>
       <v-col>
-        <MessageBox :message="post.text"/>
+        <MessageBox :message="post.message"/>
       </v-col>
-      <v-spacer v-if="!post.isMine"></v-spacer>
+      <v-spacer v-if="!isMine(post)"></v-spacer>
     </v-row>
     <v-row>
       <v-text-field
@@ -25,8 +25,11 @@
 </template>
 
 <script lang="ts">
+import {PropOptions} from 'vue';
 import MessageBox from './MessageBox.vue';
 import CustomVue from '~/custom';
+import {Post} from '~/models/post.model';
+import {Room} from '~/models/room.model';
 
 export default  CustomVue.extend({
   name      : 'ChatContainer',
@@ -44,9 +47,21 @@ export default  CustomVue.extend({
     },
     reset() {
       this.message = '';
+    },
+    isMine(post: Post): boolean {
+      return this.$accessor.auth.userId === post.ownerId;
     }
   },
-  props: ['posts']
+  props: {
+    posts: {
+      type    : Array,
+      required: true,
+    } as PropOptions<Post[]>,
+    room: {
+      type    : Object,
+      required: true,
+    } as PropOptions<Room>,
+  },
 });
 </script>
 

@@ -1,15 +1,3 @@
-export interface Post {
-  text: string;
-  postAt: Date;
-  isMine: boolean;
-}
-
-export interface Room {
-  id: string;
-  name: string;
-}
-
-
 export class OK<T, E> {
 
   constructor(readonly value: T) {}
