@@ -1,25 +1,23 @@
-import {Query, Args, Mutation, Resolver} from '@nestjs/graphql';
-import {Inject} from '@nestjs/common';
+import {Query, Args, Mutation, Resolver, Subscription} from '@nestjs/graphql';
+import {PubSub} from 'graphql-subscriptions';
 import {PostModel} from '../../../domain/models/post/post.model';
 import {AddPostRequest, PostResponse} from './post.dto';
 import {PostUsecase} from '../../../application/usecases/post/post.usecase';
-import {PostAddCommand} from '../../../application/commands/post.commands';
 import {RoomUsecase} from '../../../application/usecases/room/room.usecase';
-import {UserUsecase} from '../../../application/usecases/user/user.usecase';
 import {User} from '../../../decorators/user.decorator';
 import {UserModel} from '../../../domain/models/user/user.model';
 import {AuthGuard} from '../../authentication/auth.guard';
 import {UseGuards} from '@nestjs/common';
-import {RoomModel} from '../../../domain/models/room/room.model';
-import {EntityPId} from '../../../domain/models/common.value';
 import {MutationException} from '../../../types/error.types';
 
 @Resolver(PostResponse)
 export class PostResolver {
+    private readonly pubSub: PubSub;
     constructor(
         private readonly postUsecase: PostUsecase,
         private readonly roomUsecase: RoomUsecase,
     ) {
+        this.pubSub = new PubSub();
     }
 
     @Query((returns) => [PostResponse], {name: 'getPosts', description: '投稿の最新100件を取得する'})
@@ -44,12 +42,14 @@ export class PostResolver {
                 owner  : user,
             }
         );
-        // await this.pubSub.publish('bookAdded', newBook);
+        await this.pubSub.publish('postAdded', newPost);
         return new PostResponse(newPost);
     }
 
-    // @Subscription(returns => PostModel)
-    // async postAdded() {
-    //     return this.pubSub.asyncIterator('postAdded');
-    // }
+    @Subscription(returns => PostResponse, {
+        resolve: (payload: PostModel) => new PostResponse(payload)
+    })
+    postAdded() {
+        return this.pubSub.asyncIterator('postAdded');
+    }
 }

@@ -66,3 +66,7 @@ input AddPostRequest {
   replyTo: String
   roomId: String!
 }
+
+type Subscription {
+  postAdded: PostResponse!
+}
