@@ -32,7 +32,7 @@ export default CustomVue.extend({
         alert('失敗しました。');
         return;
       }
-      this.$accessor.auth.updateToken(response.sessionId);
+      this.$accessor.auth.updateLoginInfo(response);
     }
   }
 });

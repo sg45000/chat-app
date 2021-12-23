@@ -5,6 +5,7 @@ mutation signup($lastname: String!,$firstname: String!, $mail: String!, $passwor
     mail: $mail,
     password: $password,
   }){
+    id
     name
     mail
     sessionId
@@ -16,15 +17,16 @@ mutation login($mail: String!, $password: String!) {
     mail: $mail,
     password: $password,
   }){
-    name,
-    mail,
-    sessionId,
+    id
+    name
+    mail
+    sessionId
   }
 }
 
 query ownUser {
   ownUser {
-    name,
-    mail,
+    name
+    mail
   }
 }
