@@ -49,6 +49,7 @@ export class UserResponse {
 @ObjectType()
 export class OwnUserResponse {
     constructor(user: UserModel, session: SessionModel) {
+        this.id = user.id.value;
         this.name = user.name.value.lastName + user.name.value.firstName;
         this.mail = user.mail.value;
         this.sessionId = session.id.value;

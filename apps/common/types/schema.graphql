@@ -1,3 +1,7 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
 type UserResponse {
   """名前"""
   name: String!
@@ -32,8 +36,8 @@ type PostResponse {
 }
 
 type Query {
-  rooms: [RoomResponse!]!
   ownUser: UserResponse!
+  rooms: [RoomResponse!]!
 
   """投稿の最新100件を取得する"""
   posts: [PostResponse!]!
