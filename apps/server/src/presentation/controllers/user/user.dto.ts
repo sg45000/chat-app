@@ -53,6 +53,8 @@ export class OwnUserResponse {
         this.mail = user.mail.value;
         this.sessionId = session.id.value;
     }
+    @Field()
+    readonly id: string;
     @Field({description: '名前'})
     readonly name: string;
     @Field({description: 'メールアドレス'})

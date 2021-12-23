@@ -7,6 +7,8 @@ type UserResponse {
 }
 
 type OwnUserResponse {
+  id: String!
+
   """名前"""
   name: String!
 
