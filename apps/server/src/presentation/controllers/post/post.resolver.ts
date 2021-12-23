@@ -20,9 +20,9 @@ export class PostResolver {
         this.pubSub = new PubSub();
     }
 
-    @Query((returns) => [PostResponse], {name: 'getPosts', description: '投稿の最新100件を取得する'})
+    @Query((returns) => [PostResponse], {name: 'posts', description: '投稿の最新100件を取得する'})
     @UseGuards(AuthGuard)
-    async getPosts(): Promise<PostResponse[]> {
+    async posts(): Promise<PostResponse[]> {
         const posts = await this.postUsecase.getPostsLatest100();
         return posts.map(p => new PostResponse(p));
     }

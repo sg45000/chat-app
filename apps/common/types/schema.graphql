@@ -1,7 +1,3 @@
-# ------------------------------------------------------
-# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
-# ------------------------------------------------------
-
 type UserResponse {
   """名前"""
   name: String!
@@ -34,11 +30,11 @@ type PostResponse {
 }
 
 type Query {
-  ownUser: UserResponse!
   rooms: [RoomResponse!]!
+  ownUser: UserResponse!
 
   """投稿の最新100件を取得する"""
-  getPosts: [PostResponse!]!
+  posts: [PostResponse!]!
 }
 
 type Mutation {
