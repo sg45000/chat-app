@@ -1,6 +1,6 @@
 import {Context} from '@nuxt/types';
 import {GraphqlClientBase} from './clientBase';
-import {GetRoomsQuery, LoginMutation, SignupMutation} from './types';
+import {GetPostsQuery, GetRoomsQuery, LoginMutation, SignupMutation} from './types';
 
 export class GraphqlClient extends GraphqlClientBase {
   constructor(protected readonly ctx: Context) {
@@ -44,5 +44,16 @@ export class GraphqlClient extends GraphqlClientBase {
       return new Error('トークルームデータが取得できませんでした。');
     }
     return result.value.rooms;
+  }
+
+  /**
+   * 最新の投稿を複数件取得
+   */
+  async getPosts(): Promise<GetPostsQuery['posts'] | Error> {
+    const result = await this.request(this.sdk.getPosts, undefined);
+    if(result.isFailure()) {
+      return new Error('投稿データが取得できませんでした。');
+    }
+    return result.value.posts;
   }
 }
