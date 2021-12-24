@@ -36,7 +36,7 @@ export default CustomVue.extend({
         alert('ユーサー登録に失敗しました。');
         return;
       }
-      this.$accessor.auth.updateToken(response.sessionId);
+      this.$accessor.auth.updateLoginInfo(response);
     }
   }
 });

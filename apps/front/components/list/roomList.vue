@@ -10,7 +10,7 @@
 import {PropOptions} from 'vue';
 
 import CustomVue from '@/custom';
-import {Room} from '~/types/types';
+import {Room} from '~/models/room.model';
 
 export default CustomVue.extend({
   name : 'roomList',

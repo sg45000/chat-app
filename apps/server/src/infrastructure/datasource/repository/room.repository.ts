@@ -23,20 +23,45 @@ export class RoomRepository extends IRoomRepository {
             EntityPId.reconstruct(r.id)
         ));
     }
+
+    /**
+     * IDをキーに1件取得する
+     * @param id
+     */
+    findOneById = async(id: EntityPId<RoomModel>): Promise<RoomModel> => {
+        // fixme
+        throw Error();
+    }
 }
 
 @Injectable()
-export class MockRoomRepository extends IRoomRepository {
+export class RoomRepositoryMock extends IRoomRepository {
+    inMemoryRecords: RoomModel[] = [];
+    constructor() {
+        super();
+        this.inMemoryRecords.push(
+            RoomModel.create({name: 'トークルーム1'}),
+            RoomModel.create({name: 'トークルーム2'}),
+            RoomModel.create({name: 'トークルーム3'}),
+            
+        );
+    }
     /**
      * トークルームを全て取得する
      */
     findAll(): Promise<RoomModel[]> {
         return new Promise<RoomModel[]>((resolve)=>{
-            resolve([
-                RoomModel.create({name: 'トークルーム1'}),
-                RoomModel.create({name: 'トークルーム2'}),
-                RoomModel.create({name: 'トークルーム3'}),
-            ]);
+            resolve(this.inMemoryRecords);
+        });
+    }
+
+    /**
+     * IDをキーに1件取得する
+     * @param id
+     */
+    findOneById = async(id: EntityPId<RoomModel>): Promise<RoomModel | null> => {
+        return new Promise<RoomModel | null>((resolve) =>{
+            resolve(this.inMemoryRecords.find(r => r.id.equals(id)) || null);
         });
     }
 }
