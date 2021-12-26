@@ -20,3 +20,11 @@ export class MutationException extends CustomError {
         console.error(message); // fixme ロガー
     }
 }
+
+export class DbInsertException extends CustomError {
+    protected readonly type = 'DbInsertException'
+    constructor(message: string) {
+        super(message);
+        console.error(message); // fixme ロガー
+    }
+}

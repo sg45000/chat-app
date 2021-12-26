@@ -7,7 +7,7 @@ import {SessionRepository, SessionRepositoryMock} from './session.repository';
 import {IRoomRepository} from '../../../domain/models/room/room.repository.interface';
 import {RoomRepositoryMock} from './room.repository';
 import {IPostRepository} from '../../../domain/models/post/post.repository.interface';
-import {PostRepositoryMock} from './post.repository';
+import {PostRepository, PostRepositoryMock} from './post.repository';
 
 const providers: Provider[] = [
     {
@@ -30,7 +30,10 @@ const providers: Provider[] = [
     },
     {
         provide : IPostRepository,
-        useClass: PostRepositoryMock, //fixme
+        useClass:
+            isMocking()
+                ? PostRepositoryMock
+                : PostRepository,
     }
 ];
 @Module({
