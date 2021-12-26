@@ -5,9 +5,9 @@ import {OrmModule} from '../orm/orm.module';
 import {ISessionRepository} from '../../../domain/models/session/session.repository.interface';
 import {SessionRepository, SessionRepositoryMock} from './session.repository';
 import {IRoomRepository} from '../../../domain/models/room/room.repository.interface';
-import {RoomRepositoryMock} from './room.repository';
+import {RoomRepository, RoomRepositoryMock} from './room.repository';
 import {IPostRepository} from '../../../domain/models/post/post.repository.interface';
-import {PostRepositoryMock} from './post.repository';
+import {PostRepository, PostRepositoryMock} from './post.repository';
 
 const providers: Provider[] = [
     {
@@ -26,11 +26,17 @@ const providers: Provider[] = [
     },
     {
         provide : IRoomRepository,
-        useClass: RoomRepositoryMock, //fixme
+        useClass:
+            isMocking()
+                ? RoomRepositoryMock
+                : RoomRepository,
     },
     {
         provide : IPostRepository,
-        useClass: PostRepositoryMock, //fixme
+        useClass:
+            isMocking()
+                ? PostRepositoryMock
+                : PostRepository,
     }
 ];
 @Module({

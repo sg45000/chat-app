@@ -11,20 +11,40 @@ generator client {
 }
 
 model User {
-    @@map(name: "users")
-    id String @id
-    firstName String @map(name: "first_name") @default("")
-    lastName String @map(name: "last_name") @default("")
-    mail String @unique
-    hashedPw String @map(name: "hashed_pw")
-    createdAt DateTime @default(now()) @map(name: "created_at")
-    updatedAt DateTime @updatedAt @default(now()) @map(name: "updated_at")
+  id        String   @id
+  firstName String   @default("") @map(name: "first_name")
+  lastName  String   @default("") @map(name: "last_name")
+  mail      String   @unique
+  hashedPw  String   @map(name: "hashed_pw")
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
+  post      Post[]
+
+  @@map(name: "users")
 }
 
 model Room {
-    @@map(name: "rooms")
-    id String @id
-    name String
-    createdAt DateTime @default(now()) @map(name: "created_at")
-    updatedAt DateTime @updatedAt @default(now()) @map(name: "updated_at")
+  id        String   @id
+  name      String
+  post      Post[]
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
+
+  @@map(name: "rooms")
+}
+
+model Post {
+  id        String   @id
+  message   String
+  roomId    String
+  room      Room     @relation(fields: [roomId], references: [id])
+  replyToId String?
+  replyTo   Post?    @relation(fields: [replyToId], references: [id])
+  ownerId   String
+  owner     User     @relation(fields: [ownerId], references: [id])
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
+  posts     Post[]   @relation("PostToPost")
+
+  @@map(name: "posts")
 }

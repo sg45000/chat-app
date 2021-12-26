@@ -75,4 +75,11 @@ export class PostModel extends AbstractDomainModelObject<PostModelProps, PostMod
     get replyTo(): EntityPId<PostModel> | null {
         return this.props.replyTo;
     }
+
+    /**
+     * トークルーム
+     */
+    get room(): EntityPId<RoomModel> {
+        return this.props.room;
+    }
 }
