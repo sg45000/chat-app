@@ -28,9 +28,19 @@ export class RoomRepository extends IRoomRepository {
      * IDをキーに1件取得する
      * @param id
      */
-    findOneById = async(id: EntityPId<RoomModel>): Promise<RoomModel> => {
-        // fixme
-        throw Error();
+    findOneById = async(id: EntityPId<RoomModel>): Promise<RoomModel | null> => {
+        const room = await this.prismaClientService.room.findUnique({
+            where: {
+                id: id.value,
+            },
+        });
+        if(!room) {
+            return null;
+        }
+        return RoomModel.reconstruct(
+            {name: room.name},
+            EntityPId.reconstruct(room.id),
+        );
     }
 }
 
