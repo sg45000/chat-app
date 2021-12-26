@@ -30,6 +30,9 @@
     "prisma:sync": "prisma db push --preview-feature",
     "docker:up": "docker compose up -d"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "dependencies": {
     "@apollo/gateway": "^0.35.1",
     "@nestjs/common": "^7.6.15",
