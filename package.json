@@ -22,7 +22,8 @@
     "server:dev:mock": "yarn server start:dev:mock",
     "server:build": "yarn server build",
     "server:test": "yarn server test",
-    "db:sync": "yarn server prisma:sync"
+    "db:sync": "yarn server prisma:sync",
+    "db:seed": "yarn server prisma:seed"
   },
   "workspaces": [
     "./apps/*"
