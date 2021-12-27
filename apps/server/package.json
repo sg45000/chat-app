@@ -28,10 +28,11 @@
     "prisma:studio:local": "dotenv -e ./env/.env.local -- prisma studio",
     "prisma:gen:local": "dotenv -e ./env/.env.local -- prisma generate",
     "prisma:sync": "prisma db push --preview-feature",
+    "prisma:seed": "dotenv -e ./env/.env.local -- prisma db seed",
     "docker:up": "docker compose up -d"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed"
   },
   "dependencies": {
     "@apollo/gateway": "^0.35.1",
