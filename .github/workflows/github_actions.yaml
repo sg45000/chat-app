@@ -40,5 +40,7 @@ jobs:
         run: yarn install
       - name: sync DB
         run: yarn run db:sync
+      - name: seed DB
+        run: yarn run db:seed
       - name: Run Server test
         run: yarn run server:test
