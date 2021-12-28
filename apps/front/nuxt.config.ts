@@ -28,7 +28,9 @@ const nuxtConfig: NuxtConfig = {
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
-
+  publicRuntimeConfig: {
+    graphqlBaseUrl: process.env.GRAPHQL_BASE_URL || '/graphql', // ルートの.envファイルを読み込んでくれる
+  },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],

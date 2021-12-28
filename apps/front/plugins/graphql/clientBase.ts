@@ -13,7 +13,7 @@ export type GraphqlClientSdk = ReturnType<typeof createGraphqlClient>
 export abstract class GraphqlClientBase {
   protected readonly sdk: GraphqlClientSdk;
   protected constructor(protected readonly ctx: Context) {
-    const client = new GraphQLClient('http://localhost:3030/graphql'); // fixme 可変に
+    const client = new GraphQLClient(ctx.$config.graphqlBaseUrl);
     this.sdk = createGraphqlClient(client);
   }
 
