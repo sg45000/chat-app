@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "yarn server start:prod",
-    "build": "yarn server:build && yarn front:build",
+    "build": "yarn server:build && yarn front:build && yarn db:sync",
     "dev": "yarn front:dev & yarn server:dev",
     "front": "yarn workspace front",
     "front:dev": "yarn front dev",
