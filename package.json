@@ -25,12 +25,18 @@
     "db:sync": "yarn server prisma:sync",
     "db:seed": "yarn server prisma:seed"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn server:test"
+    }
+  },
   "workspaces": [
     "./apps/*"
   ],
   "repository": "git@github.com:sg45000/chat-app.git",
   "author": "hamabe <hamabe@neopa.jp>",
   "devDependencies": {
+    "husky": "^7.0.4",
     "lerna": "^4.0.0"
   },
   "dependencies": {
