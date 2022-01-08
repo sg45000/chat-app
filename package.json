@@ -23,12 +23,9 @@
     "server:build": "yarn server build",
     "server:test": "yarn server test",
     "db:sync": "yarn server prisma:sync",
-    "db:seed": "yarn server prisma:seed"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn server:test"
-    }
+    "db:seed": "yarn server prisma:seed",
+    "postinstall": "husky install",
+    "server:lint-staged": "yarn server lint-staged"
   },
   "workspaces": [
     "./apps/*"
@@ -37,7 +34,8 @@
   "author": "hamabe <hamabe@neopa.jp>",
   "devDependencies": {
     "husky": "^7.0.4",
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "lint-staged": "^12.1.7"
   },
   "dependencies": {
     "dotenv": "^10.0.0"
