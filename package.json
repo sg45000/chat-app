@@ -23,7 +23,9 @@
     "server:build": "yarn server build",
     "server:test": "yarn server test",
     "db:sync": "yarn server prisma:sync",
-    "db:seed": "yarn server prisma:seed"
+    "db:seed": "yarn server prisma:seed",
+    "postinstall": "husky install",
+    "server:lint-staged": "yarn server lint-staged"
   },
   "workspaces": [
     "./apps/*"
@@ -31,7 +33,9 @@
   "repository": "git@github.com:sg45000/chat-app.git",
   "author": "hamabe <hamabe@neopa.jp>",
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "husky": "^7.0.4",
+    "lerna": "^4.0.0",
+    "lint-staged": "^12.1.7"
   },
   "dependencies": {
     "dotenv": "^10.0.0"
