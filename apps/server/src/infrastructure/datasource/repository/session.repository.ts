@@ -30,6 +30,10 @@ export class SessionRepository extends ISessionRepository {
 @Injectable()
 export class SessionRepositoryMock extends ISessionRepository {
     async create(session: SessionModel): Promise<void> {
+        //fixme 未実装
+        return new Promise(resolve => {
+            throw new Error();
+        });
     }
 
     async findOne(id: EntityPId<SessionModel>): Promise<SessionModel | null> {
