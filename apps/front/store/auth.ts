@@ -32,6 +32,9 @@ export const getters = getterTree(state, {
   },
   userId(state: AuthState): string {
     return state.userId;
+  },
+  isAuthenticated(state: AuthState): boolean {
+    return !!state.token;
   }
 });
 

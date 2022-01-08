@@ -33,6 +33,7 @@ export default CustomVue.extend({
         return;
       }
       this.$accessor.auth.updateLoginInfo(response);
+      this.$router.push('room');
     }
   }
 });
