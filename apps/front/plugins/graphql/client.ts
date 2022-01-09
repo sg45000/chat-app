@@ -6,6 +6,7 @@ import {
   LoginMutationResponse,
   SignupMutationResponse
 } from '~/plugins/graphql/response.types';
+import {NG, OK, Result} from '~/types/types';
 
 export class GraphqlClient extends GraphqlClientBase {
   constructor(protected readonly ctx: Context) {
@@ -17,12 +18,12 @@ export class GraphqlClient extends GraphqlClientBase {
    * @param mail
    * @param password
    */
-  async login(mail: string, password: string): Promise<LoginMutationResponse | null> {
-    const result = await this.request(this.sdk.login, {mail, password});
-    if(result.isFailure()) {
-      return null;
+  async login(mail: string, password: string): Promise<Result<LoginMutationResponse, Error>> {
+    const response = await this.request(this.sdk.login, {mail, password});
+    if(response instanceof Error) {
+      return new NG(response);
     }
-    return result.value.login;
+    return new OK(response.login);
   }
 
   /**
@@ -32,33 +33,33 @@ export class GraphqlClient extends GraphqlClientBase {
    * @param mail
    * @param password
    */
-  async signup(firstname: string, lastname: string, mail: string, password: string): Promise<SignupMutationResponse | null> {
-    const result = await this.request(this.sdk.signup, {firstname, lastname, mail, password});
-    if(result.isFailure()) {
-      return null;
+  async signup(firstname: string, lastname: string, mail: string, password: string): Promise<Result<SignupMutationResponse, Error>> {
+    const response = await this.request(this.sdk.signup, {firstname, lastname, mail, password});
+    if(response instanceof Error) {
+      return new NG(response);
     }
-    return result.value.signup;
+    return new OK(response.signup);
   }
 
   /**
    * 全トークルーム取得
    */
-  async getRooms(): Promise<GetRoomsQueryResponse[] | Error> {
-    const result = await this.request(this.sdk.getRooms, undefined);
-    if(result.isFailure()) {
-      return new Error('トークルームデータが取得できませんでした。');
+  async getRooms(): Promise<Result<GetRoomsQueryResponse[], Error>> {
+    const response = await this.request(this.sdk.getRooms, undefined);
+    if(response instanceof Error) {
+      return new NG(response);
     }
-    return result.value.rooms;
+    return new OK(response.rooms);
   }
 
   /**
    * 最新の投稿を複数件取得
    */
-  async getPosts(): Promise<GetPostsQueryResponse[] | Error> {
-    const result = await this.request(this.sdk.getPosts, undefined);
-    if(result.isFailure()) {
-      return new Error('投稿データが取得できませんでした。');
+  async getPosts(): Promise<Result<GetPostsQueryResponse[], Error>> {
+    const response = await this.request(this.sdk.getPosts, undefined);
+    if(response instanceof Error) {
+      return new NG(response);
     }
-    return result.value.posts;
+    return new OK(response.posts);
   }
 }
