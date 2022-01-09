@@ -28,11 +28,12 @@ export default CustomVue.extend({
         this.formValues.values.mail,
         this.formValues.values.password
       );
-      if(!response) {
-        alert('失敗しました。');
+      if(response.isFailure()) {
+        alert(response.value.message);
         return;
       }
-      this.$accessor.auth.updateLoginInfo(response);
+      this.$accessor.auth.updateLoginInfo(response.value);
+      this.$router.push('room');
     }
   }
 });

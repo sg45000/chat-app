@@ -28,3 +28,11 @@ export class DbInsertException extends CustomError {
         console.error(message); // fixme ロガー
     }
 }
+
+export class ValidationException extends CustomError {
+    protected readonly type = 'ValidationException'
+    constructor(message: string) {
+        super(message);
+        console.error(message); // fixme ロガー
+    }
+}

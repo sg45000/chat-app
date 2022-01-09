@@ -27,11 +27,11 @@ export default CustomVue.extend({
   methods: {
     async getPosts(): Promise<Post[]> {
       const response = await this.$graphql.getPosts();
-      if(response instanceof Error) {
-        alert(response.message);
+      if(response.isFailure()) {
+        alert(response.value.message);
         return [];
       }
-      return response.map(r => new Post(r.id, r.message, r.ownerId, new Date()));
+      return response.value.map(r => new Post(r.id, r.message, r.ownerId, new Date()));
     }
   }
 });

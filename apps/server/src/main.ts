@@ -3,6 +3,7 @@ import {AppModule} from './app.module';
 import {ValidationPipe} from '@nestjs/common';
 import {NestExpressApplication} from '@nestjs/platform-express';
 import {join} from 'path';
+import {HttpExceptionFilter} from 'src/presentation/filters/exception.filter';
 /**
  * return static files path
  */
@@ -17,6 +18,7 @@ async function bootstrap() {
     console.log(`staticFilesPath: ${staticFilesPath}`);
     app.useStaticAssets(staticFilesPath);
 
+    app.useGlobalFilters(new HttpExceptionFilter());
     app.useGlobalPipes(new ValidationPipe({}));
     const port = process.env.PORT || 3030;
     await app.listen(port);

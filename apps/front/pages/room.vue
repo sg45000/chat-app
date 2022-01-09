@@ -22,12 +22,12 @@ export default CustomVue.extend({
   },
   methods: {
     async getRooms(): Promise<Room[]> {
-      const rooms = await this.$graphql.getRooms();
-      if(rooms instanceof Error) {
-        alert(rooms.message);
+      const response = await this.$graphql.getRooms();
+      if(response.isFailure()) {
+        alert(response.value.message);
         return [];
       }
-      return rooms.map(r => new Room(r.id, r.name, this.$accessor.auth.userId));
+      return response.value.map(r => new Room(r.id, r.name, this.$accessor.auth.userId));
     },
     enterRoom(room: Room) {
       console.log(room);
