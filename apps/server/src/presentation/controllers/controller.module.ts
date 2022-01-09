@@ -6,6 +6,7 @@ import {join} from 'path';
 import {RepositoryModule} from '../../infrastructure/datasource/repository/repository.module';
 import {RoomResolver} from './room/room.resolver';
 import {PostResolver} from './post/post.resolver';
+import {GraphQLError, GraphQLFormattedError} from 'graphql';
 
 @Module({
     providers: [UserResolver, RoomResolver, PostResolver],
@@ -13,6 +14,12 @@ import {PostResolver} from './post/post.resolver';
         GraphQLModule.forRoot({
             installSubscriptionHandlers: true,
             autoSchemaFile             : join(process.cwd(), '..', 'common', 'types', 'schema.graphql'),
+            formatError                : (error: GraphQLError) => {
+                const graphQLFormattedError: GraphQLFormattedError = {
+                    message: error.message,
+                };
+                return graphQLFormattedError;
+            },
         }),
         UsecaseModule,
         RepositoryModule
