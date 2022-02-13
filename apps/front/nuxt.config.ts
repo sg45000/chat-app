@@ -29,7 +29,7 @@ const nuxtConfig: NuxtConfig = {
     ]
   },
   publicRuntimeConfig: {
-    graphqlBaseUrl: process.env.GRAPHQL_BASE_URL || '/graphql', // ルートの.envファイルを読み込んでくれる
+    graphqlBaseUrl: '/graphql', // ルートの.envファイルを読み込んでくれる
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -71,7 +71,7 @@ const nuxtConfig: NuxtConfig = {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://localhost:3030'
+        httpEndpoint: process.env.GRAPHQL_BASE_URL || 'http://localhost:3030'
       }
     }
   },
