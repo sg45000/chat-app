@@ -38,6 +38,8 @@ jobs:
           node-version: '14.x'
       - name: Install Dependencies
         run: yarn install
+      - name: type check
+        run: yarn server tsc --noEmit
       - name: sync DB
         run: yarn run db:sync
       - name: seed DB
